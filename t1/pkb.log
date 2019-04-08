@@ -1,0 +1,1440 @@
+2019-04-06 16:19:34,890 153d7368 MainThread pkb.py:940 INFO     PerfKitBenchmarker version: v1.12.0-1081-g5b4f8028
+2019-04-06 16:19:34,891 153d7368 MainThread pkb.py:914 INFO     Flag values:
+--cloud=Kubernetes
+--kubeconfig=/home/pakawat_nk/.kube/config
+--kubectl=/snap/bin/kubectl
+--benchmarks=iperf
+--image=gcr.io/cs5052-p2/myappmew
+2019-04-06 16:19:35,021 153d7368 MainThread pkb.py:983 INFO     Setting --max_concurrent_threads=200.
+2019-04-06 16:19:35,042 153d7368 MainThread __init__.py:257 WARNING  The key "flags" was not in the default config, but was in user overrides. This may indicate a typo.
+2019-04-06 16:19:35,055 153d7368 MainThread publisher.py:864 DEBUG    Using publishers: [<LogPublisher logger=<logging.RootLogger object at 0x7fa18392b710> level=20>, <PrettyPrintStreamPublisher stream=<open file '<stdout>', mode 'w' at 0x7fa185145150>>, <NewlineDelimitedJSONPublisher file_path="/tmp/perfkitbenchmarker/runs/153d7368/perfkitbenchmarker_results.json" mode="wb">]
+2019-04-06 16:19:35,056 153d7368 MainThread publisher.py:864 DEBUG    Using publishers: [<LogPublisher logger=<logging.RootLogger object at 0x7fa18392b710> level=20>, <PrettyPrintStreamPublisher stream=<open file '<stdout>', mode 'w' at 0x7fa185145150>>, <NewlineDelimitedJSONPublisher file_path="/tmp/perfkitbenchmarker/runs/153d7368/perfkitbenchmarker_results.json" mode="wb">]
+2019-04-06 16:19:35,056 153d7368 MainThread iperf(1/1) pkb.py:523 INFO     Provisioning resources for benchmark iperf
+2019-04-06 16:19:35,060 153d7368 Thread-1 iperf(1/1) kubernetes_virtual_machine.py:118 INFO     About to create a pod with the following configuration:
+2019-04-06 16:19:35,061 153d7368 Thread-1 iperf(1/1) kubernetes_virtual_machine.py:119 INFO     {"kind": "Pod", "spec": {"dnsPolicy": "ClusterFirst", "affinity": {"podAntiAffinity": {"requiredDuringSchedulingIgnoredDuringExecution": [{"labelSelector": {"matchExpressions": [{"operator": "In", "values": [""], "key": "pkb_anti_affinity"}]}, "topologyKey": "kubernetes.io/hostname"}]}}, "containers": [{"securityContext": {"privileged": true}, "name": "pkb-153d7368-1", "volumeMounts": [], "image": "gcr.io/cs5052-p2/myappmew", "workingDir": "/root", "command": ["bash", "-c", "apt-get update && apt-get install -y sudo && sed -i '/env_reset/d' /etc/sudoers && sed -i '/secure_path/d' /etc/sudoers && sudo ldconfig && tail -f /dev/null"]}], "volumes": []}, "apiVersion": "v1", "metadata": {"labels": {"pkb": "pkb-153d7368-1", "pkb_anti_affinity": ""}, "name": "pkb-153d7368-1"}}
+2019-04-06 16:19:35,062 153d7368 Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config create -f /tmp/tmpahwTZI
+2019-04-06 16:19:35,066 153d7368 Thread-2 iperf(1/1) kubernetes_virtual_machine.py:118 INFO     About to create a pod with the following configuration:
+2019-04-06 16:19:35,067 153d7368 Thread-2 iperf(1/1) kubernetes_virtual_machine.py:119 INFO     {"kind": "Pod", "spec": {"dnsPolicy": "ClusterFirst", "affinity": {"podAntiAffinity": {"requiredDuringSchedulingIgnoredDuringExecution": [{"labelSelector": {"matchExpressions": [{"operator": "In", "values": [""], "key": "pkb_anti_affinity"}]}, "topologyKey": "kubernetes.io/hostname"}]}}, "containers": [{"securityContext": {"privileged": true}, "name": "pkb-153d7368-0", "volumeMounts": [], "image": "gcr.io/cs5052-p2/myappmew", "workingDir": "/root", "command": ["bash", "-c", "apt-get update && apt-get install -y sudo && sed -i '/env_reset/d' /etc/sudoers && sed -i '/secure_path/d' /etc/sudoers && sudo ldconfig && tail -f /dev/null"]}], "volumes": []}, "apiVersion": "v1", "metadata": {"labels": {"pkb": "pkb-153d7368-0", "pkb_anti_affinity": ""}, "name": "pkb-153d7368-0"}}
+2019-04-06 16:19:35,067 153d7368 Thread-2 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config create -f /tmp/tmpOVl0d5
+2019-04-06 16:19:35,652 153d7368 Thread-2 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config create -f /tmp/tmpOVl0d5}  ReturnCode:0
+STDOUT: pod/pkb-153d7368-0 created
+
+STDERR: 
+2019-04-06 16:19:35,653 153d7368 Thread-2 iperf(1/1) kubernetes_virtual_machine.py:129 INFO     Waiting for POD pkb-153d7368-0
+2019-04-06 16:19:35,653 153d7368 Thread-2 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0
+2019-04-06 16:19:35,665 153d7368 Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config create -f /tmp/tmpahwTZI}  ReturnCode:0
+STDOUT: pod/pkb-153d7368-1 created
+
+STDERR: 
+2019-04-06 16:19:35,665 153d7368 Thread-1 iperf(1/1) kubernetes_virtual_machine.py:129 INFO     Waiting for POD pkb-153d7368-1
+2019-04-06 16:19:35,666 153d7368 Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1
+2019-04-06 16:19:35,947 153d7368 Thread-2 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container pkb-153d7368-0"
+        },
+        "creationTimestamp": "2019-04-06T16:19:35Z",
+        "labels": {
+            "pkb": "pkb-153d7368-0",
+            "pkb_anti_affinity": ""
+        },
+        "name": "pkb-153d7368-0",
+        "namespace": "default",
+        "resourceVersion": "5371",
+        "selfLink": "/api/v1/namespaces/default/pods/pkb-153d7368-0",
+        "uid": "c4b9d91b-5887-11e9-849a-42010aa400ab"
+    },
+    "spec": {
+        "affinity": {
+            "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                    {
+                        "labelSelector": {
+                            "matchExpressions": [
+                                {
+                                    "key": "pkb_anti_affinity",
+                                    "operator": "In",
+                                    "values": [
+                                        ""
+                                    ]
+                                }
+                            ]
+                        },
+                        "topologyKey": "kubernetes.io/hostname"
+                    }
+                ]
+            }
+        },
+        "containers": [
+            {
+                "command": [
+                    "bash",
+                    "-c",
+                    "apt-get update \u0026\u0026 apt-get install -y sudo \u0026\u0026 sed -i '/env_reset/d' /etc/sudoers \u0026\u0026 sed -i '/secure_path/d' /etc/sudoers \u0026\u0026 sudo ldconfig \u0026\u0026 tail -f /dev/null"
+                ],
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imagePullPolicy": "Always",
+                "name": "pkb-153d7368-0",
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "securityContext": {
+                    "privileged": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-xfrsr",
+                        "readOnly": true
+                    }
+                ],
+                "workingDir": "/root"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm-default-pool-9e7e573e-cpc0",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-xfrsr",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-xfrsr"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "message": "containers with unready status: [pkb-153d7368-0]",
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "message": "containers with unready status: [pkb-153d7368-0]",
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imageID": "",
+                "lastState": {},
+                "name": "pkb-153d7368-0",
+                "ready": false,
+                "restartCount": 0,
+                "state": {
+                    "waiting": {
+                        "reason": "ContainerCreating"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.2",
+        "phase": "Pending",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-06T16:19:35Z"
+    }
+}
+
+STDERR: 
+2019-04-06 16:19:35,950 153d7368 Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container pkb-153d7368-1"
+        },
+        "creationTimestamp": "2019-04-06T16:19:35Z",
+        "labels": {
+            "pkb": "pkb-153d7368-1",
+            "pkb_anti_affinity": ""
+        },
+        "name": "pkb-153d7368-1",
+        "namespace": "default",
+        "resourceVersion": "5372",
+        "selfLink": "/api/v1/namespaces/default/pods/pkb-153d7368-1",
+        "uid": "c4ba93ef-5887-11e9-849a-42010aa400ab"
+    },
+    "spec": {
+        "affinity": {
+            "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                    {
+                        "labelSelector": {
+                            "matchExpressions": [
+                                {
+                                    "key": "pkb_anti_affinity",
+                                    "operator": "In",
+                                    "values": [
+                                        ""
+                                    ]
+                                }
+                            ]
+                        },
+                        "topologyKey": "kubernetes.io/hostname"
+                    }
+                ]
+            }
+        },
+        "containers": [
+            {
+                "command": [
+                    "bash",
+                    "-c",
+                    "apt-get update \u0026\u0026 apt-get install -y sudo \u0026\u0026 sed -i '/env_reset/d' /etc/sudoers \u0026\u0026 sed -i '/secure_path/d' /etc/sudoers \u0026\u0026 sudo ldconfig \u0026\u0026 tail -f /dev/null"
+                ],
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imagePullPolicy": "Always",
+                "name": "pkb-153d7368-1",
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "securityContext": {
+                    "privileged": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-xfrsr",
+                        "readOnly": true
+                    }
+                ],
+                "workingDir": "/root"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm-default-pool-9e7e573e-t2cz",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-xfrsr",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-xfrsr"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "message": "containers with unready status: [pkb-153d7368-1]",
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "message": "containers with unready status: [pkb-153d7368-1]",
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imageID": "",
+                "lastState": {},
+                "name": "pkb-153d7368-1",
+                "ready": false,
+                "restartCount": 0,
+                "state": {
+                    "waiting": {
+                        "reason": "ContainerCreating"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.4",
+        "phase": "Pending",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-06T16:19:35Z"
+    }
+}
+
+STDERR: 
+2019-04-06 16:19:42,252 153d7368 Thread-2 iperf(1/1) kubernetes_virtual_machine.py:129 INFO     Waiting for POD pkb-153d7368-0
+2019-04-06 16:19:42,253 153d7368 Thread-2 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0
+2019-04-06 16:19:42,409 153d7368 Thread-2 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container pkb-153d7368-0"
+        },
+        "creationTimestamp": "2019-04-06T16:19:35Z",
+        "labels": {
+            "pkb": "pkb-153d7368-0",
+            "pkb_anti_affinity": ""
+        },
+        "name": "pkb-153d7368-0",
+        "namespace": "default",
+        "resourceVersion": "5379",
+        "selfLink": "/api/v1/namespaces/default/pods/pkb-153d7368-0",
+        "uid": "c4b9d91b-5887-11e9-849a-42010aa400ab"
+    },
+    "spec": {
+        "affinity": {
+            "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                    {
+                        "labelSelector": {
+                            "matchExpressions": [
+                                {
+                                    "key": "pkb_anti_affinity",
+                                    "operator": "In",
+                                    "values": [
+                                        ""
+                                    ]
+                                }
+                            ]
+                        },
+                        "topologyKey": "kubernetes.io/hostname"
+                    }
+                ]
+            }
+        },
+        "containers": [
+            {
+                "command": [
+                    "bash",
+                    "-c",
+                    "apt-get update \u0026\u0026 apt-get install -y sudo \u0026\u0026 sed -i '/env_reset/d' /etc/sudoers \u0026\u0026 sed -i '/secure_path/d' /etc/sudoers \u0026\u0026 sudo ldconfig \u0026\u0026 tail -f /dev/null"
+                ],
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imagePullPolicy": "Always",
+                "name": "pkb-153d7368-0",
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "securityContext": {
+                    "privileged": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-xfrsr",
+                        "readOnly": true
+                    }
+                ],
+                "workingDir": "/root"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm-default-pool-9e7e573e-cpc0",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-xfrsr",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-xfrsr"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:38Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://82c3846d2efb8e5bc35d0b6c13c8e509642ffc4388c5f439936bfd6200e1913a",
+                "image": "gcr.io/cs5052-p2/myappmew:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/myappmew@sha256:c896494532e1029096cef7ff25e07ce8c491e7f00e932fdf15141a86836e067a",
+                "lastState": {},
+                "name": "pkb-153d7368-0",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-06T16:19:37Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.2",
+        "phase": "Running",
+        "podIP": "10.8.0.17",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-06T16:19:35Z"
+    }
+}
+
+STDERR: 
+2019-04-06 16:19:42,410 153d7368 Thread-2 iperf(1/1) kubernetes_virtual_machine.py:138 INFO     POD is up and running.
+2019-04-06 16:19:42,410 153d7368 Thread-2 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0
+2019-04-06 16:19:42,594 153d7368 Thread-2 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container pkb-153d7368-0"
+        },
+        "creationTimestamp": "2019-04-06T16:19:35Z",
+        "labels": {
+            "pkb": "pkb-153d7368-0",
+            "pkb_anti_affinity": ""
+        },
+        "name": "pkb-153d7368-0",
+        "namespace": "default",
+        "resourceVersion": "5379",
+        "selfLink": "/api/v1/namespaces/default/pods/pkb-153d7368-0",
+        "uid": "c4b9d91b-5887-11e9-849a-42010aa400ab"
+    },
+    "spec": {
+        "affinity": {
+            "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                    {
+                        "labelSelector": {
+                            "matchExpressions": [
+                                {
+                                    "key": "pkb_anti_affinity",
+                                    "operator": "In",
+                                    "values": [
+                                        ""
+                                    ]
+                                }
+                            ]
+                        },
+                        "topologyKey": "kubernetes.io/hostname"
+                    }
+                ]
+            }
+        },
+        "containers": [
+            {
+                "command": [
+                    "bash",
+                    "-c",
+                    "apt-get update \u0026\u0026 apt-get install -y sudo \u0026\u0026 sed -i '/env_reset/d' /etc/sudoers \u0026\u0026 sed -i '/secure_path/d' /etc/sudoers \u0026\u0026 sudo ldconfig \u0026\u0026 tail -f /dev/null"
+                ],
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imagePullPolicy": "Always",
+                "name": "pkb-153d7368-0",
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "securityContext": {
+                    "privileged": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-xfrsr",
+                        "readOnly": true
+                    }
+                ],
+                "workingDir": "/root"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm-default-pool-9e7e573e-cpc0",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-xfrsr",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-xfrsr"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:38Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://82c3846d2efb8e5bc35d0b6c13c8e509642ffc4388c5f439936bfd6200e1913a",
+                "image": "gcr.io/cs5052-p2/myappmew:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/myappmew@sha256:c896494532e1029096cef7ff25e07ce8c491e7f00e932fdf15141a86836e067a",
+                "lastState": {},
+                "name": "pkb-153d7368-0",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-06T16:19:37Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.2",
+        "phase": "Running",
+        "podIP": "10.8.0.17",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-06T16:19:35Z"
+    }
+}
+
+STDERR: 
+2019-04-06 16:19:42,595 153d7368 Thread-2 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pods pkb-153d7368-0 -ojsonpath={.status.podIP}
+2019-04-06 16:19:42,752 153d7368 Thread-2 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pods pkb-153d7368-0 -ojsonpath={.status.podIP}}  ReturnCode:0
+STDOUT: 10.8.0.17
+STDERR: 
+2019-04-06 16:19:42,752 153d7368 Thread-2 iperf(1/1) benchmark_spec.py:675 INFO     VM: None
+2019-04-06 16:19:42,753 153d7368 Thread-2 iperf(1/1) benchmark_spec.py:676 INFO     Waiting for boot completion.
+2019-04-06 16:19:42,753 153d7368 Thread-2 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c hostname
+2019-04-06 16:19:43,116 153d7368 Thread-2 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c hostname}  ReturnCode:0
+STDOUT: pkb-153d7368-0
+
+STDERR: 
+2019-04-06 16:19:43,159 153d7368 Thread-1 iperf(1/1) kubernetes_virtual_machine.py:129 INFO     Waiting for POD pkb-153d7368-1
+2019-04-06 16:19:43,160 153d7368 Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1
+2019-04-06 16:19:43,333 153d7368 Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container pkb-153d7368-1"
+        },
+        "creationTimestamp": "2019-04-06T16:19:35Z",
+        "labels": {
+            "pkb": "pkb-153d7368-1",
+            "pkb_anti_affinity": ""
+        },
+        "name": "pkb-153d7368-1",
+        "namespace": "default",
+        "resourceVersion": "5380",
+        "selfLink": "/api/v1/namespaces/default/pods/pkb-153d7368-1",
+        "uid": "c4ba93ef-5887-11e9-849a-42010aa400ab"
+    },
+    "spec": {
+        "affinity": {
+            "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                    {
+                        "labelSelector": {
+                            "matchExpressions": [
+                                {
+                                    "key": "pkb_anti_affinity",
+                                    "operator": "In",
+                                    "values": [
+                                        ""
+                                    ]
+                                }
+                            ]
+                        },
+                        "topologyKey": "kubernetes.io/hostname"
+                    }
+                ]
+            }
+        },
+        "containers": [
+            {
+                "command": [
+                    "bash",
+                    "-c",
+                    "apt-get update \u0026\u0026 apt-get install -y sudo \u0026\u0026 sed -i '/env_reset/d' /etc/sudoers \u0026\u0026 sed -i '/secure_path/d' /etc/sudoers \u0026\u0026 sudo ldconfig \u0026\u0026 tail -f /dev/null"
+                ],
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imagePullPolicy": "Always",
+                "name": "pkb-153d7368-1",
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "securityContext": {
+                    "privileged": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-xfrsr",
+                        "readOnly": true
+                    }
+                ],
+                "workingDir": "/root"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm-default-pool-9e7e573e-t2cz",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-xfrsr",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-xfrsr"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:38Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://9f4aad0c761d5f0adbc0c42e1d14830fd53de5c4fa3baa1e80c93735fe9b0418",
+                "image": "gcr.io/cs5052-p2/myappmew:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/myappmew@sha256:c896494532e1029096cef7ff25e07ce8c491e7f00e932fdf15141a86836e067a",
+                "lastState": {},
+                "name": "pkb-153d7368-1",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-06T16:19:37Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.4",
+        "phase": "Running",
+        "podIP": "10.8.2.11",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-06T16:19:35Z"
+    }
+}
+
+STDERR: 
+2019-04-06 16:19:43,333 153d7368 Thread-1 iperf(1/1) kubernetes_virtual_machine.py:138 INFO     POD is up and running.
+2019-04-06 16:19:43,334 153d7368 Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1
+2019-04-06 16:19:43,491 153d7368 Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container pkb-153d7368-1"
+        },
+        "creationTimestamp": "2019-04-06T16:19:35Z",
+        "labels": {
+            "pkb": "pkb-153d7368-1",
+            "pkb_anti_affinity": ""
+        },
+        "name": "pkb-153d7368-1",
+        "namespace": "default",
+        "resourceVersion": "5380",
+        "selfLink": "/api/v1/namespaces/default/pods/pkb-153d7368-1",
+        "uid": "c4ba93ef-5887-11e9-849a-42010aa400ab"
+    },
+    "spec": {
+        "affinity": {
+            "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                    {
+                        "labelSelector": {
+                            "matchExpressions": [
+                                {
+                                    "key": "pkb_anti_affinity",
+                                    "operator": "In",
+                                    "values": [
+                                        ""
+                                    ]
+                                }
+                            ]
+                        },
+                        "topologyKey": "kubernetes.io/hostname"
+                    }
+                ]
+            }
+        },
+        "containers": [
+            {
+                "command": [
+                    "bash",
+                    "-c",
+                    "apt-get update \u0026\u0026 apt-get install -y sudo \u0026\u0026 sed -i '/env_reset/d' /etc/sudoers \u0026\u0026 sed -i '/secure_path/d' /etc/sudoers \u0026\u0026 sudo ldconfig \u0026\u0026 tail -f /dev/null"
+                ],
+                "image": "gcr.io/cs5052-p2/myappmew",
+                "imagePullPolicy": "Always",
+                "name": "pkb-153d7368-1",
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "securityContext": {
+                    "privileged": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-xfrsr",
+                        "readOnly": true
+                    }
+                ],
+                "workingDir": "/root"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm-default-pool-9e7e573e-t2cz",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-xfrsr",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-xfrsr"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:38Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-06T16:19:35Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://9f4aad0c761d5f0adbc0c42e1d14830fd53de5c4fa3baa1e80c93735fe9b0418",
+                "image": "gcr.io/cs5052-p2/myappmew:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/myappmew@sha256:c896494532e1029096cef7ff25e07ce8c491e7f00e932fdf15141a86836e067a",
+                "lastState": {},
+                "name": "pkb-153d7368-1",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-06T16:19:37Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.4",
+        "phase": "Running",
+        "podIP": "10.8.2.11",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-06T16:19:35Z"
+    }
+}
+
+STDERR: 
+2019-04-06 16:19:43,492 153d7368 Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pods pkb-153d7368-1 -ojsonpath={.status.podIP}
+2019-04-06 16:19:43,649 153d7368 Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pods pkb-153d7368-1 -ojsonpath={.status.podIP}}  ReturnCode:0
+STDOUT: 10.8.2.11
+STDERR: 
+2019-04-06 16:19:43,649 153d7368 Thread-1 iperf(1/1) benchmark_spec.py:675 INFO     VM: None
+2019-04-06 16:19:43,650 153d7368 Thread-1 iperf(1/1) benchmark_spec.py:676 INFO     Waiting for boot completion.
+2019-04-06 16:19:43,650 153d7368 Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c hostname
+2019-04-06 16:19:43,985 153d7368 Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c hostname}  ReturnCode:0
+STDOUT: pkb-153d7368-1
+
+STDERR: 
+2019-04-06 16:19:44,028 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c mkdir -p /tmp/pkb
+2019-04-06 16:19:44,032 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c mkdir -p /tmp/pkb
+2019-04-06 16:19:44,455 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c mkdir -p /tmp/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:44,456 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo mkdir -p /opt/pkb
+2019-04-06 16:19:44,462 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c mkdir -p /tmp/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:44,463 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo mkdir -p /opt/pkb
+2019-04-06 16:19:44,892 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo mkdir -p /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:44,893 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo chmod a+rwxt /opt/pkb
+2019-04-06 16:19:44,895 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo mkdir -p /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:44,895 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo chmod a+rwxt /opt/pkb
+2019-04-06 16:19:45,344 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo chmod a+rwxt /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:45,344 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo apt-get update
+2019-04-06 16:19:45,386 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo chmod a+rwxt /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:45,386 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo apt-get update
+2019-04-06 16:19:48,920 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo apt-get update}  ReturnCode:0
+STDOUT: Hit http://security.ubuntu.com trusty-security InRelease
+Ign http://archive.ubuntu.com trusty InRelease
+Hit http://archive.ubuntu.com trusty-updates InRelease
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports InRelease
+Hit http://archive.ubuntu.com trusty Release.gpg
+Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/restricted amd64 Packages
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty Release
+Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+Reading package lists...
+
+STDERR: 
+2019-04-06 16:19:48,920 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python
+2019-04-06 16:19:48,992 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo apt-get update}  ReturnCode:0
+STDOUT: Ign http://archive.ubuntu.com trusty InRelease
+Hit http://archive.ubuntu.com trusty-updates InRelease
+Hit http://security.ubuntu.com trusty-security InRelease
+Hit http://archive.ubuntu.com trusty-backports InRelease
+Hit http://archive.ubuntu.com trusty Release.gpg
+Hit http://archive.ubuntu.com trusty-updates/main amd64 Packages
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/universe amd64 Packages
+Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty Release
+Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+Reading package lists...
+
+STDERR: 
+2019-04-06 16:19:48,992 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python
+2019-04-06 16:19:51,233 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+python is already the newest version.
+python set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+
+STDERR: 
+2019-04-06 16:19:51,233 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control
+2019-04-06 16:19:51,358 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+python is already the newest version.
+python set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+
+STDERR: 
+2019-04-06 16:19:51,359 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control
+2019-04-06 16:19:51,565 153d7368 Thread-15 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control}  ReturnCode:1
+STDOUT: 
+STDERR: cat: /proc/sys/net/ipv4/tcp_congestion_control: No such file or directory
+command terminated with exit code 1
+
+2019-04-06 16:19:51,567 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c lscpu
+2019-04-06 16:19:51,725 153d7368 Thread-16 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control}  ReturnCode:1
+STDOUT: 
+STDERR: cat: /proc/sys/net/ipv4/tcp_congestion_control: No such file or directory
+command terminated with exit code 1
+
+2019-04-06 16:19:51,726 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c lscpu
+2019-04-06 16:19:51,881 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c lscpu}  ReturnCode:0
+STDOUT: Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 85
+Stepping:              3
+CPU MHz:               2000.148
+BogoMIPS:              4000.29
+Hypervisor vendor:     KVM
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              56320K
+NUMA node0 CPU(s):     0
+
+STDERR: 
+2019-04-06 16:19:51,883 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release
+2019-04-06 16:19:52,068 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c lscpu}  ReturnCode:0
+STDOUT: Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                1
+On-line CPU(s) list:   0
+Thread(s) per core:    1
+Core(s) per socket:    1
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 85
+Stepping:              3
+CPU MHz:               2000.166
+BogoMIPS:              4000.33
+Hypervisor vendor:     KVM
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              56320K
+NUMA node0 CPU(s):     0
+
+STDERR: 
+2019-04-06 16:19:52,068 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release
+2019-04-06 16:19:54,105 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+lsb-release is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+
+STDERR: 
+2019-04-06 16:19:54,106 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c lsb_release -d
+2019-04-06 16:19:54,491 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+lsb-release is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+
+STDERR: 
+2019-04-06 16:19:54,491 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c lsb_release -d
+2019-04-06 16:19:54,584 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c lsb_release -d}  ReturnCode:0
+STDOUT: Description:	Ubuntu 14.04.6 LTS
+
+STDERR: 
+2019-04-06 16:19:54,585 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c uname -r
+2019-04-06 16:19:54,946 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c uname -r}  ReturnCode:0
+STDOUT: 4.14.91+
+
+STDERR: 
+2019-04-06 16:19:54,947 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh
+2019-04-06 16:19:54,986 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c lsb_release -d}  ReturnCode:0
+STDOUT: Description:	Ubuntu 14.04.6 LTS
+
+STDERR: 
+2019-04-06 16:19:54,986 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c uname -r
+2019-04-06 16:19:55,373 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c uname -r}  ReturnCode:0
+STDOUT: 4.14.91+
+
+STDERR: 
+2019-04-06 16:19:55,373 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh
+2019-04-06 16:19:57,231 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+ssh is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+
+STDERR: 
+2019-04-06 16:19:57,232 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo /etc/init.d/ssh restart
+2019-04-06 16:19:57,570 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo /etc/init.d/ssh restart}  ReturnCode:0
+STDOUT:  * Restarting OpenBSD Secure Shell server sshd
+   ...done.
+
+STDERR: 
+2019-04-06 16:19:57,570 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c mkdir -p ~/.ssh
+2019-04-06 16:19:57,847 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+ssh is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+
+STDERR: 
+2019-04-06 16:19:57,848 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo /etc/init.d/ssh restart
+2019-04-06 16:19:57,883 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c mkdir -p ~/.ssh}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:57,883 153d7368 Thread-15 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwCfkNtvvXIkLHfi/LkpNoArWwEUgvp5KWWFFxkvdGeZR3LjYFS3A4xrk1fJFJt/3nkm8/vaVJdvQPFOol71tGnUbi14yMcG4OKhf00Jj3WSq2avPRS9b+DRVasC1532vxst80xSqYSx+UVkafcuDcj2PCFy+W7InAvsaDmFFNUnpaeBA6uSE5rTgfDAjQ5KDxNk/GgdBCBKGuUqYFKoaNUcyv9XlFsTyDjlgVwTENKgfPOeLKT5nLDZosJYrwkuQ1jBqaB81u+1+WyVssK7BCRikIKu+vn0O8WFI1SCE1XMJt4SnKEiry0ccby0QlTZUQshBUVi070RRzWIeXcmFh pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys
+2019-04-06 16:19:58,261 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo /etc/init.d/ssh restart}  ReturnCode:0
+STDOUT:  * Restarting OpenBSD Secure Shell server sshd
+   ...done.
+
+STDERR: 
+2019-04-06 16:19:58,261 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c mkdir -p ~/.ssh
+2019-04-06 16:19:58,314 153d7368 Thread-15 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwCfkNtvvXIkLHfi/LkpNoArWwEUgvp5KWWFFxkvdGeZR3LjYFS3A4xrk1fJFJt/3nkm8/vaVJdvQPFOol71tGnUbi14yMcG4OKhf00Jj3WSq2avPRS9b+DRVasC1532vxst80xSqYSx+UVkafcuDcj2PCFy+W7InAvsaDmFFNUnpaeBA6uSE5rTgfDAjQ5KDxNk/GgdBCBKGuUqYFKoaNUcyv9XlFsTyDjlgVwTENKgfPOeLKT5nLDZosJYrwkuQ1jBqaB81u+1+WyVssK7BCRikIKu+vn0O8WFI1SCE1XMJt4SnKEiry0ccby0QlTZUQshBUVi070RRzWIeXcmFh pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:58,585 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c mkdir -p ~/.ssh}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:58,586 153d7368 Thread-16 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwCfkNtvvXIkLHfi/LkpNoArWwEUgvp5KWWFFxkvdGeZR3LjYFS3A4xrk1fJFJt/3nkm8/vaVJdvQPFOol71tGnUbi14yMcG4OKhf00Jj3WSq2avPRS9b+DRVasC1532vxst80xSqYSx+UVkafcuDcj2PCFy+W7InAvsaDmFFNUnpaeBA6uSE5rTgfDAjQ5KDxNk/GgdBCBKGuUqYFKoaNUcyv9XlFsTyDjlgVwTENKgfPOeLKT5nLDZosJYrwkuQ1jBqaB81u+1+WyVssK7BCRikIKu+vn0O8WFI1SCE1XMJt4SnKEiry0ccby0QlTZUQshBUVi070RRzWIeXcmFh pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys
+2019-04-06 16:19:58,968 153d7368 Thread-16 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwCfkNtvvXIkLHfi/LkpNoArWwEUgvp5KWWFFxkvdGeZR3LjYFS3A4xrk1fJFJt/3nkm8/vaVJdvQPFOol71tGnUbi14yMcG4OKhf00Jj3WSq2avPRS9b+DRVasC1532vxst80xSqYSx+UVkafcuDcj2PCFy+W7InAvsaDmFFNUnpaeBA6uSE5rTgfDAjQ5KDxNk/GgdBCBKGuUqYFKoaNUcyv9XlFsTyDjlgVwTENKgfPOeLKT5nLDZosJYrwkuQ1jBqaB81u+1+WyVssK7BCRikIKu+vn0O8WFI1SCE1XMJt4SnKEiry0ccby0QlTZUQshBUVi070RRzWIeXcmFh pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-06 16:19:59,020 153d7368 MainThread iperf(1/1) vm_util.py:526 INFO     ssh to VMs in this benchmark by name with:
+  ssh -F /tmp/perfkitbenchmarker/runs/153d7368/ssh_config <vm_name>
+  ssh -F /tmp/perfkitbenchmarker/runs/153d7368/ssh_config vm<index>
+  ssh -F /tmp/perfkitbenchmarker/runs/153d7368/ssh_config <group_name>-<index>
+2019-04-06 16:19:59,022 153d7368 MainThread iperf(1/1) pkb.py:561 INFO     Preparing benchmark iperf
+2019-04-06 16:19:59,026 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf
+2019-04-06 16:20:03,521 153d7368 MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  iperf
+0 upgraded, 1 newly installed, 0 to remove and 8 not upgraded.
+Need to get 56.3 kB of archives.
+After this operation, 174 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/universe iperf amd64 2.0.5-3 [56.3 kB]
+Fetched 56.3 kB in 0s (622 kB/s)
+Selecting previously unselected package iperf.
+(Reading database ... 15898 files and directories currently installed.)
+Preparing to unpack .../iperf_2.0.5-3_amd64.deb ...
+Unpacking iperf (2.0.5-3) ...
+Setting up iperf (2.0.5-3) ...
+
+STDERR: 
+2019-04-06 16:20:03,522 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c nohup iperf --server --port 20000 &> /dev/null& echo $!
+2019-04-06 16:20:03,828 153d7368 MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c nohup iperf --server --port 20000 &> /dev/null& echo $!}  ReturnCode:0
+STDOUT: 197
+
+STDERR: 
+2019-04-06 16:20:03,829 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf
+2019-04-06 16:20:08,044 153d7368 MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  iperf
+0 upgraded, 1 newly installed, 0 to remove and 8 not upgraded.
+Need to get 56.3 kB of archives.
+After this operation, 174 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/universe iperf amd64 2.0.5-3 [56.3 kB]
+Fetched 56.3 kB in 0s (668 kB/s)
+Selecting previously unselected package iperf.
+(Reading database ... 15898 files and directories currently installed.)
+Preparing to unpack .../iperf_2.0.5-3_amd64.deb ...
+Unpacking iperf (2.0.5-3) ...
+Setting up iperf (2.0.5-3) ...
+
+STDERR: 
+2019-04-06 16:20:08,045 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c nohup iperf --server --port 20000 &> /dev/null& echo $!
+2019-04-06 16:20:08,424 153d7368 MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-1 -- /bin/bash -c nohup iperf --server --port 20000 &> /dev/null& echo $!}  ReturnCode:0
+STDOUT: 198
+
+STDERR: 
+2019-04-06 16:20:08,428 153d7368 MainThread iperf(1/1) pkb.py:595 INFO     Running benchmark iperf
+2019-04-06 16:20:08,428 153d7368 MainThread iperf(1/1) iperf_benchmark.py:169 INFO     Iperf Results:
+2019-04-06 16:20:08,429 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+2019-04-06 16:20:08,850 153d7368 MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1}  ReturnCode:1
+STDOUT: 
+STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:20:08,851 153d7368 MainThread iperf(1/1) vm_util.py:278 INFO     Retrying exception running _RunIperf: Got non-zero return code (1) executing iperf --client None --port 20000 --format m --time 60 -P 1
+Full command: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+STDOUT: STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:20:26,993 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+2019-04-06 16:20:27,324 153d7368 MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1}  ReturnCode:1
+STDOUT: 
+STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:20:27,325 153d7368 MainThread iperf(1/1) vm_util.py:278 INFO     Retrying exception running _RunIperf: Got non-zero return code (1) executing iperf --client None --port 20000 --format m --time 60 -P 1
+Full command: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+STDOUT: STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:20:47,077 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+2019-04-06 16:20:47,416 153d7368 MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1}  ReturnCode:1
+STDOUT: 
+STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:20:47,417 153d7368 MainThread iperf(1/1) vm_util.py:278 INFO     Retrying exception running _RunIperf: Got non-zero return code (1) executing iperf --client None --port 20000 --format m --time 60 -P 1
+Full command: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+STDOUT: STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:21:12,610 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+2019-04-06 16:21:12,954 153d7368 MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1}  ReturnCode:1
+STDOUT: 
+STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:21:12,955 153d7368 MainThread iperf(1/1) vm_util.py:278 INFO     Retrying exception running _RunIperf: Got non-zero return code (1) executing iperf --client None --port 20000 --format m --time 60 -P 1
+Full command: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+STDOUT: STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:21:40,168 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+2019-04-06 16:21:40,596 153d7368 MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1}  ReturnCode:1
+STDOUT: 
+STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:21:40,597 153d7368 MainThread iperf(1/1) vm_util.py:278 INFO     Retrying exception running _RunIperf: Got non-zero return code (1) executing iperf --client None --port 20000 --format m --time 60 -P 1
+Full command: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+STDOUT: STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:22:10,519 153d7368 MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+2019-04-06 16:22:10,856 153d7368 MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1}  ReturnCode:1
+STDOUT: 
+STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:22:10,857 153d7368 MainThread iperf(1/1) pkb.py:785 ERROR    Error during benchmark iperf
+Traceback (most recent call last):
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/pkb.py", line 748, in RunBenchmark
+    DoRunPhase(spec, collector, detailed_timer)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/pkb.py", line 599, in DoRunPhase
+    samples = spec.BenchmarkRun(spec)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_benchmarks/iperf_benchmark.py", line 178, in Run
+    'external'))
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/vm_util.py", line 269, in WrappedFunction
+    return f(*args, **kwargs)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_benchmarks/iperf_benchmark.py", line 109, in _RunIperf
+    timeout_buffer)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_virtual_machine.py", line 598, in RemoteCommand
+    return self.RemoteCommandWithReturnCode(*args, **kwargs)[:2]
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_virtual_machine.py", line 614, in RemoteCommandWithReturnCode
+    return self.RemoteHostCommandWithReturnCode(*args, **kwargs)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/providers/kubernetes/kubernetes_virtual_machine.py", line 367, in RemoteHostCommandWithReturnCode
+    raise errors.VirtualMachine.RemoteCommandError(error_text)
+RemoteCommandError: Got non-zero return code (1) executing iperf --client None --port 20000 --format m --time 60 -P 1
+Full command: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+STDOUT: STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:22:10,928 153d7368 Thread-59 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config delete pod pkb-153d7368-1
+2019-04-06 16:22:10,932 153d7368 Thread-60 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config delete pod pkb-153d7368-0
+2019-04-06 16:22:43,149 153d7368 Thread-60 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config delete pod pkb-153d7368-0}  ReturnCode:0
+STDOUT: pod "pkb-153d7368-0" deleted
+
+STDERR: 
+2019-04-06 16:22:43,149 153d7368 Thread-60 iperf(1/1) kubernetes_virtual_machine.py:150 INFO     pod "pkb-153d7368-0" deleted
+2019-04-06 16:22:43,150 153d7368 Thread-60 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0
+2019-04-06 16:22:43,310 153d7368 Thread-60 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-0}  ReturnCode:1
+STDOUT: 
+STDERR: Error from server (NotFound): pods "pkb-153d7368-0" not found
+
+2019-04-06 16:22:50,218 153d7368 Thread-59 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config delete pod pkb-153d7368-1}  ReturnCode:0
+STDOUT: pod "pkb-153d7368-1" deleted
+
+STDERR: 
+2019-04-06 16:22:50,218 153d7368 Thread-59 iperf(1/1) kubernetes_virtual_machine.py:150 INFO     pod "pkb-153d7368-1" deleted
+2019-04-06 16:22:50,218 153d7368 Thread-59 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1
+2019-04-06 16:22:50,409 153d7368 Thread-59 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config get pod -o=json pkb-153d7368-1}  ReturnCode:1
+STDOUT: 
+STDERR: Error from server (NotFound): pods "pkb-153d7368-1" not found
+
+2019-04-06 16:22:50,437 153d7368 MainThread iperf(1/1) pkb.py:893 ERROR    Exception running benchmark
+Traceback (most recent call last):
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/pkb.py", line 891, in RunBenchmarkTask
+    RunBenchmark(spec, collector)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/pkb.py", line 748, in RunBenchmark
+    DoRunPhase(spec, collector, detailed_timer)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/pkb.py", line 599, in DoRunPhase
+    samples = spec.BenchmarkRun(spec)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_benchmarks/iperf_benchmark.py", line 178, in Run
+    'external'))
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/vm_util.py", line 269, in WrappedFunction
+    return f(*args, **kwargs)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_benchmarks/iperf_benchmark.py", line 109, in _RunIperf
+    timeout_buffer)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_virtual_machine.py", line 598, in RemoteCommand
+    return self.RemoteCommandWithReturnCode(*args, **kwargs)[:2]
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/linux_virtual_machine.py", line 614, in RemoteCommandWithReturnCode
+    return self.RemoteHostCommandWithReturnCode(*args, **kwargs)
+  File "/home/pakawat_nk/PerfKitBenchmarker/perfkitbenchmarker/providers/kubernetes/kubernetes_virtual_machine.py", line 367, in RemoteHostCommandWithReturnCode
+    raise errors.VirtualMachine.RemoteCommandError(error_text)
+RemoteCommandError: Got non-zero return code (1) executing iperf --client None --port 20000 --format m --time 60 -P 1
+Full command: /snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config exec -i pkb-153d7368-0 -- /bin/bash -c iperf --client None --port 20000 --format m --time 60 -P 1
+STDOUT: STDERR: error: Name or service not known
+command terminated with exit code 1
+
+2019-04-06 16:22:50,440 153d7368 MainThread iperf(1/1) pkb.py:900 ERROR    Benchmark 1/1 iperf (UID: iperf0) failed. Execution will continue.
+2019-04-06 16:22:50,440 153d7368 MainThread iperf(1/1) pkb.py:1032 INFO     Benchmark run statuses:
+---------------------------------------
+Name   UID     Status  Failed Substatus
+---------------------------------------
+iperf  iperf0  FAILED                  
+---------------------------------------
+Success rate: 0.00% (0/1)
+2019-04-06 16:22:50,441 153d7368 MainThread iperf(1/1) pkb.py:1035 INFO     Complete logs can be found at: /tmp/perfkitbenchmarker/runs/153d7368/pkb.log
+2019-04-06 16:22:50,441 153d7368 MainThread iperf(1/1) pkb.py:1037 INFO     Completion statuses can be found at: /tmp/perfkitbenchmarker/runs/153d7368/completion_statuses.json

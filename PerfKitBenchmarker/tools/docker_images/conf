@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Config
+preferences: {}
+clusters:
+- cluster:
+    server: http://localhost:8080
+  name: local-server
+
+contexts:
+- context:
+    cluster: local-server
+    namespace: the-right-prefix
+    user: myself
+  name: default-context
+
+current-context: default-context
+
+users:
+- name: myself
+  user:
+    username: admin
+    password: secret
