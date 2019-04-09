@@ -35,7 +35,7 @@ $ ./PerfKitBenchmarker/pkb.py --cloud=Kubernetes --kubectl=/snap/bin/kubectl --b
 * Main.py does not connect with PerfKitBenchmarker properly.
 * Support multiple endpoints (benchmark when it exploits loadbalancer)
 * Clean up pods
-* Something wierd with `iperf` Port?? Check log again
+* Call iperf from external client `iperf --client 35.204.47.217 --port 5000 --format m --time 10 -P 1`
 * call iperf with different params `iperf -c 1.1.1.1 --port 80 --format m --time 10 -P [10]**`
 * Connect with other benchmarks
 * Analyse data from benchmarks

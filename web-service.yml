@@ -10,8 +10,10 @@ spec:
     - port: 80
       targetPort: 3000
       protocol: TCP
+      name: http-server
     - port: 5000
       targetPort: 5000
       protocol: TCP
+      name: iperf-server
   selector:
     name: web
