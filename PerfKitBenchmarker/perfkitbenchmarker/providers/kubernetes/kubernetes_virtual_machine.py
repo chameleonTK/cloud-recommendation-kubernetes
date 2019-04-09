@@ -14,7 +14,7 @@
 
 """Contains code related to lifecycle management of Kubernetes Pods."""
 
-import json
+import json, yaml
 import logging
 import posixpath
 
@@ -60,6 +60,7 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     self.image = self.image or self.DEFAULT_IMAGE
     self.resource_limits = vm_spec.resource_limits
     self.resource_requests = vm_spec.resource_requests
+    self.instances = []
 
   def GetResourceMetadata(self):
     metadata = super(KubernetesVirtualMachine, self).GetResourceMetadata()
@@ -114,29 +115,67 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     """
     Creates a POD (Docker container with optional volumes).
     """
-    create_rc_body = self._BuildPodBody()
-    logging.info('About to create a pod with the following configuration:')
-    logging.info(create_rc_body)
-    kubernetes_helper.CreateResource(create_rc_body)
+    #create_rc_body = self._BuildPodBody()
+    #logging.info('About to create a pod with the following configuration:')
+    logging.info("Name: "+self.name)
+    '''
+    logging.info("LOAD: "+FLAGS.kube_db_controller)
+    
+    dbctrl = open(FLAGS.kube_db_controller).read()
+    kubernetes_helper.CreateResource(dbctrl)
+    
+    logging.info("LOAD: "+FLAGS.kube_db_service)
+    dbserv = open(FLAGS.kube_db_service).read()
+    kubernetes_helper.CreateResource(dbserv)
 
+    logging.info("LOAD: "+FLAGS.kube_web_controller)
+    webctrl = open(FLAGS.kube_web_controller).read()
+    kubernetes_helper.CreateResource(webctrl)
+
+    logging.info("LOAD: "+FLAGS.kube_web_service)
+    webserv = open(FLAGS.kube_web_service).read()
+    kubernetes_helper.CreateResource(webserv)
+    '''
+ 
   @vm_util.Retry(poll_interval=10, max_retries=100, log_errors=False)
   def _WaitForPodBootCompletion(self):
     """
     Need to wait for the PODs to get up  - PODs are created with a little delay.
     """
-    exists_cmd = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig, 'get',
-                  'pod', '-o=json', self.name]
+    exists_cmd = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig, 'get', 'pod', "-o", "json"]
     logging.info('Waiting for POD %s' % self.name)
-    pod_info, _, _ = vm_util.IssueCommand(exists_cmd, suppress_warning=True)
+    pod_info, _, _w = vm_util.IssueCommand(exists_cmd, suppress_warning=True)
+    
     if pod_info:
       pod_info = json.loads(pod_info)
-      containers = pod_info['spec']['containers']
-      if len(containers) == 1:
-        pod_status = pod_info['status']['phase']
-        if (containers[0]['name'].startswith(self.name)
-            and pod_status == 'Running'):
-          logging.info('POD is up and running.')
-          return
+      all_ready = True
+      self.instances = pod_info["items"]
+
+      for item in pod_info["items"]:
+        pod_status = item['status']['phase']
+        logging.info("POD STATUS: "+pod_status)
+        if pod_status != "Running":
+          all_ready = False
+          break
+        
+        #TODO implement to support multiple clients
+        name = item["metadata"]["name"]
+        if name.startswith("web-controller"):
+           self.name = name
+
+      if all_ready:
+        logging.info('PODs are up and running.')
+        return 
+      #containers = pod_info['spec']['containers']
+
+      #print containers
+      #if len(containers) == 1:
+      #  pod_status = pod_info['status']['phase']
+      #  if (containers[0]['name'].startswith(self.name)
+      #      and pod_status == 'Running'):
+      #    logging.info('POD is up and running.')
+      #    return
+
     raise Exception('POD %s is not running. Retrying to check status.' %
                     self.name)
 
@@ -146,8 +185,9 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     """
     delete_pod = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig,
                   'delete', 'pod', self.name]
-    output = vm_util.IssueCommand(delete_pod)
-    logging.info(output[STDOUT].rstrip())
+    #TODO uncomment
+    # output = vm_util.IssueCommand(delete_pod)
+    #logging.info(output[STDOUT].rstrip())
 
   @vm_util.Retry(poll_interval=10, max_retries=20)
   def _Exists(self):
@@ -185,12 +225,16 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     """
     Gets the POD's internal ip address.
     """
-    pod_ip = kubernetes_helper.Get(
-        'pods', self.name, '', '.status.podIP')
+    ext_ip = kubernetes_helper.Get('services', "web", '', '.status.loadBalancer.ingress[0].ip')
+    pod_ip = kubernetes_helper.Get('services', "web", '', '.spec.clusterIP')
 
     if not pod_ip:
       raise Exception('Internal POD IP address not found. Retrying.')
 
+    if not ext_ip:
+      raise Exception("External IP address not found")
+
+    self.ip_address = ext_ip
     self.internal_ip = pod_ip
 
   def _ConfigureProxy(self):

@@ -10,8 +10,6 @@ parser.add_argument("-kc", "--kubectl", required=True, help="Path to your kubect
 #parser.add_argument("-i", "--image", required=True, help="Docker image")
 parser.add_argument("-p", "--project", required=True, help="Project Name")
 
-#--kubectl=/snap/bin/kubectl --kubeconfig=/home/pakawat_nk/.kube/config --image=gcr.io/cs5052-p2/myappmew
-
 args = parser.parse_args()
 
 print args
@@ -86,8 +84,17 @@ for c in configs:
     print "CLUSTER CONFIG: "
     print c
 
-    #clusterName = createCluster(clusterPrefix, index, args.project, c)
-    clusterName = "bm1-4867"
+    clusterName = createCluster(clusterPrefix, index, args.project, c)
+    
+    print clusterName 
+    issueCommand([
+	"gcloud", "compute", "disks", "create", "--project", "cs5052-p2", "--zone", "us-central1-f", "--size", "200GB", "mongo-disk"
+    ])
+
+    #gcloud compute disks create --project "cs5052-p2" --zone "us-central1-f" --size 200GB mongo-disk
+
+
+    #clusterName = "bm1-4867"
     issueCommand(["cp", os.path.expanduser('~/.kube/config'), "kubeconfig.yml"])    
-    runBenchmark(clusterName, c)
+    #runBenchmark(clusterName, c)
     index += 1

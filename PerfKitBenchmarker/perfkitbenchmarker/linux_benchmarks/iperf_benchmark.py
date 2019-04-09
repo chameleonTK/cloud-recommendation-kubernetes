@@ -54,7 +54,8 @@ iperf:
       vm_spec: *default_single_core
 """
 
-IPERF_PORT = 20000
+#IPERF_PORT = 20000
+IPERF_PORT = 80
 IPERF_RETRIES = 5
 
 
@@ -171,20 +172,18 @@ def Run(benchmark_spec):
   # Send traffic in both directions
   for sending_vm, receiving_vm in vms, reversed(vms):
     # Send using external IP addresses
-    logging.info('TKTKTKTKIperf Results: '+str(receiving_vm.ip_address))
-    logging.info('TKTKTKTKIperf Results: '+str(receiving_vm))
-    #if True: #vm_util.ShouldRunOnExternalIpAddress():
-    #  results.append(_RunIperf(sending_vm,
-    #                           receiving_vm,
-    #                           receiving_vm.ip_address,
-    #                           'external'))
-
-    # Send using internal IP addresses
-    if True: #vm_util.ShouldRunOnInternalIpAddress(sending_vm, receiving_vm):
+    if True: #vm_util.ShouldRunOnExternalIpAddress():
       results.append(_RunIperf(sending_vm,
                                receiving_vm,
-                               receiving_vm.internal_ip,
-                               'internal'))
+                               receiving_vm.ip_address,
+                               'external'))
+
+    # Send using internal IP addresses
+    #if True: #vm_util.ShouldRunOnInternalIpAddress(sending_vm, receiving_vm):
+    #  results.append(_RunIperf(sending_vm,
+    #                           receiving_vm,
+    #                           receiving_vm.internal_ip,
+    #                           'internal'))
 
   return results
 
