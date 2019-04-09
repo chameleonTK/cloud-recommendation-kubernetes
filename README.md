@@ -15,6 +15,8 @@ It is an part of [CS5052](https://info.cs.st-andrews.ac.uk/student-handbook/modu
 5. Install `gcloud`; [Follow this link](https://cloud.google.com/sdk/install)
 6. Install `kubectl`; [Follow this link](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 7. Run `gcloud init`; It will prompt a dialog to log in and set your project.
+8. Enable Google Cloud API; Kubernetes API, Billing API
+
 
 
 ## Running
