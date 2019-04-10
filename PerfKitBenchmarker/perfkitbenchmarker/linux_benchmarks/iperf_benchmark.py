@@ -87,7 +87,7 @@ def Prepare(benchmark_spec):
 
 
 @vm_util.Retry(max_retries=IPERF_RETRIES)
-def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type):
+def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type, thread_count = 1):
   """Run iperf using sending 'vm' to connect to 'ip_address'.
 
   Args:
@@ -101,7 +101,7 @@ def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type):
   iperf_cmd = ('iperf --client %s --port %s --format m --time %s -P %s' %
                (receiving_ip_address, IPERF_PORT,
                 FLAGS.iperf_runtime_in_seconds,
-                FLAGS.iperf_sending_thread_count))
+                thread_count))
   # the additional time on top of the iperf runtime is to account for the
   # time it takes for the iperf process to start and exit
   timeout_buffer = FLAGS.iperf_timeout or 30 + FLAGS.iperf_sending_thread_count
@@ -171,19 +171,9 @@ def Run(benchmark_spec):
 
   # Send traffic in both directions
   for sending_vm, receiving_vm in vms, reversed(vms):
-    # Send using external IP addresses
-    if True: #vm_util.ShouldRunOnExternalIpAddress():
-      results.append(_RunIperf(sending_vm,
-                               receiving_vm,
-                               receiving_vm.ip_address,
-                               'external'))
-
-    # Send using internal IP addresses
-    #if True: #vm_util.ShouldRunOnInternalIpAddress(sending_vm, receiving_vm):
-    #  results.append(_RunIperf(sending_vm,
-    #                           receiving_vm,
-    #                           receiving_vm.internal_ip,
-    #                           'internal'))
+    for p in ["1", "10", "20", "40", "60", "100", "200", "500"]:
+      r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
+      results.append(r)
 
   return results
 
