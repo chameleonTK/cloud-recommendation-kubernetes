@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 import subprocess
 import os
 
+import sys
 from random import randint
 
 #python Main.py --kubectl=/snap/bin/kubectl --project=cs5052-p2 -m n1-standard-1 -z europe-west4-a -n 2
@@ -20,7 +21,7 @@ print args
 
 def issueCommand(cmd):
     print "CMD: "," ".join(cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     #out, err = p.communicate()
     #print "STDOUT: ", out
@@ -30,20 +31,20 @@ def issueCommand(cmd):
     e = ""
     print "STDOUT:"
     while True:
-        output = p.stdout.readline()
+        output = p.stdout.read()
+        print output
         if output == '' and p.poll() is not None:
             break
-        if output:
+        if output != '':
             o += output
-            print output.strip()
+            sys.stdout.write(out)
+            sys.stdout.flush()
+            #print output.strip()
 
     print "STDERR:"
     e = p.stderr.read()
     print e
     rc = p.poll()
-
-
-    return rc, o, e
 
 def createCluster(clusterPrefix, index, projectName, conf):
     print "CREATE CLUSTER: "
@@ -89,17 +90,14 @@ for c in configs:
     print "CLUSTER CONFIG: "
     print c
 
-    clusterName = createCluster(clusterPrefix, index, args.project, c)
-    
+    #clusterName = createCluster(clusterPrefix, index, args.project, c)
+    clusterName = "bm1-4923"
     print clusterName 
-    issueCommand([
-	"gcloud", "compute", "disks", "create", "--project", args.project, "--zone", c["zone"], "--size", "200GB", "mongo-disk"
-    ])
-
-    #gcloud compute disks create --project "cs5052-p2" --zone "us-central1-f" --size 200GB mongo-disk
-
+    #issueCommand([
+#	"gcloud", "compute", "disks", "create", "--project", args.project, "--zone", c["zone"], "--size", "200GB", "mongo-disk"
+#    ])
 
     #clusterName = "bm1-4867"
-    issueCommand(["cp", os.path.expanduser('~/.kube/config'), "kubeconfig.yml"])    
+    #issueCommand(["cp", os.path.expanduser('~/.kube/config'), "kubeconfig.yml"])    
     #runBenchmark(clusterName, c)
     index += 1
