@@ -107,7 +107,7 @@ def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type):
   timeout_buffer = FLAGS.iperf_timeout or 30 + FLAGS.iperf_sending_thread_count
   stdout, _ = sending_vm.RemoteCommand(iperf_cmd, should_log=True,
                                        timeout=FLAGS.iperf_runtime_in_seconds +
-                                       timeout_buffer)
+                                       timeout_buffer, on_host=True)
 
   # Example output from iperf that needs to be parsed
   # STDOUT: ------------------------------------------------------------

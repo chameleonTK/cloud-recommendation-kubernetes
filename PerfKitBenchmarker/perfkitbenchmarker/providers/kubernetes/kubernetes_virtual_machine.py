@@ -62,6 +62,8 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     self.resource_requests = vm_spec.resource_requests
     self.instances = []
 
+    self.deleteResource = False
+
   def GetResourceMetadata(self):
     metadata = super(KubernetesVirtualMachine, self).GetResourceMetadata()
     if self.resource_limits:
@@ -94,6 +96,7 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     self._SetupDevicesPaths()
 
   def _Delete(self):
+    self.deleteResource = True
     self._DeletePod()
 
   def _CheckPrerequisites(self):
@@ -197,6 +200,11 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     exists_cmd = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig, 'get',
                   'pod', '-o=json', self.name]
     pod_info, _, _ = vm_util.IssueCommand(exists_cmd, suppress_warning=True)
+
+    # TODO delete this mockup result
+    if self.deleteResource:
+      return False
+
     if pod_info:
       return True
     return False
@@ -396,10 +404,15 @@ class DebianBasedKubernetesVirtualMachine(KubernetesVirtualMachine,
   def RemoteHostCommandWithReturnCode(self, command,
                                       should_log=False, retries=None,
                                       ignore_failure=False, login_shell=False,
-                                      suppress_warning=False, timeout=None):
+                                      suppress_warning=False, timeout=None, on_host=False):
+
     """Runs a command in the Kubernetes container."""
     cmd = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig, 'exec', '-i',
            self.name, '--', '/bin/bash', '-c', command]
+    
+    if on_host:
+      cmd = ["/bin/bash", "-c", command]
+
     stdout, stderr, retcode = vm_util.IssueCommand(
         cmd, force_info_log=should_log,
         suppress_warning=suppress_warning, timeout=timeout)
