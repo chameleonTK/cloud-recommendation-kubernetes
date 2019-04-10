@@ -269,29 +269,30 @@ def Run(benchmark_spec):
   vms = benchmark_spec.vms
   results = []
 
-  # logging.info('Iperf Results:')
+  logging.info('Iperf Results:')
 
-  # # Send traffic in both directions
-  # for sending_vm, receiving_vm in vms, reversed(vms):
-  #   for p in [1, 10, 20, 40]:
-  #     try:
-  #       r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
-  #       results.append(r)
-  #     except Exception as e:
-  #       metadata = {
-  #           # The meta data defining the environment
-  #           'receiving_machine_type': receiving_vm.machine_type,
-  #           'receiving_zone': receiving_vm.zone,
-  #           'sending_machine_type': sending_vm.machine_type,
-  #           'sending_thread_count': p,
-  #           'sending_zone': sending_vm.zone,
-  #           'runtime_in_seconds': FLAGS.iperf_runtime_in_seconds,
-  #           'ip_type': "external"
-  #       }
+  # Send traffic in both directions
+  for sending_vm, receiving_vm in vms, reversed(vms):
+    for p in [1, 10, 20, 40]:
+      try:
+        r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
+        results.append(r)
+      except Exception as e:
+        metadata = {
+            # The meta data defining the environment
+            'receiving_machine_type': receiving_vm.machine_type,
+            'receiving_zone': receiving_vm.zone,
+            'sending_machine_type': sending_vm.machine_type,
+            'sending_thread_count': p,
+            'sending_zone': sending_vm.zone,
+            'runtime_in_seconds': FLAGS.iperf_runtime_in_seconds,
+            'ip_type': "external"
+        }
 
-  #       results.append(sample.Sample('Throughput', 0, 'Mbits/sec', metadata))
+        results.append(sample.Sample('Throughput', 0, 'Mbits/sec', metadata))
 
   logging.info('AB Results:')
+  
   # Stress test
   for sending_vm, receiving_vm in vms, reversed(vms):
     for p in [5, 10, 50, 100, 200, 500, 1000]:
