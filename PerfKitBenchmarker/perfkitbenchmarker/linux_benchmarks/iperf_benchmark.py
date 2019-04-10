@@ -75,15 +75,15 @@ def Prepare(benchmark_spec):
     raise ValueError(
         'iperf benchmark requires exactly two machines, found {0}'.format(len(
             vms)))
-  # TODO Enable it
-  # for vm in vms:
-  #   vm.Install('iperf')
-  #   if vm_util.ShouldRunOnExternalIpAddress():
-  #     vm.AllowPort(IPERF_PORT)
-  #   stdout, _ = vm.RemoteCommand(('nohup iperf --server --port %s &> /dev/null'
-  #                                 '& echo $!') % IPERF_PORT)
-  #   # TODO store this in a better place once we have a better place
-  #   vm.iperf_server_pid = stdout.strip()
+
+  for vm in vms:
+    vm.Install('iperf')
+    if vm_util.ShouldRunOnExternalIpAddress():
+      vm.AllowPort(IPERF_PORT)
+    stdout, _ = vm.RemoteCommand(('nohup iperf --server --port %s &> /dev/null'
+                                  '& echo $!') % IPERF_PORT)
+    # TODO store this in a better place once we have a better place
+    vm.iperf_server_pid = stdout.strip()
 
 
 #@vm_util.Retry(max_retries=IPERF_RETRIES)
@@ -294,7 +294,7 @@ def Run(benchmark_spec):
   logging.info('AB Results:')
   # Stress test
   for sending_vm, receiving_vm in vms, reversed(vms):
-    for p in [1, 5, 10, 50, 100, 200]:
+    for p in [5, 10, 50, 100, 200, 500, 1000]:
       try:
         r = _RunAB(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
         results.extend(r)
@@ -310,7 +310,7 @@ def Run(benchmark_spec):
             'ip_type': "external"
         }
 
-        results.append(sample.Sample('Requests per sec', 0, '#/sec', metadata))
+        results.append(sample.Sample('Requests per sec', -1, '#/sec', metadata))
         
   return results
 
@@ -323,6 +323,5 @@ def Cleanup(benchmark_spec):
         required to run the benchmark.
   """
   vms = benchmark_spec.vms
-  # TODO Enable it
-  # for vm in vms:
-  #   vm.RemoteCommand('kill -9 ' + vm.iperf_server_pid, ignore_failure=True)
+  for vm in vms:
+    vm.RemoteCommand('kill -9 ' + vm.iperf_server_pid, ignore_failure=True)
