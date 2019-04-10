@@ -412,6 +412,7 @@ class DebianBasedKubernetesVirtualMachine(KubernetesVirtualMachine,
     
     if on_host:
       cmd = ["/bin/bash", "-c", command]
+      ignore_failure = True
 
     stdout, stderr, retcode = vm_util.IssueCommand(
         cmd, force_info_log=should_log,

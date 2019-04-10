@@ -86,7 +86,7 @@ def Prepare(benchmark_spec):
     vm.iperf_server_pid = stdout.strip()
 
 
-@vm_util.Retry(max_retries=IPERF_RETRIES)
+#@vm_util.Retry(max_retries=IPERF_RETRIES)
 def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type, thread_count = 1):
   """Run iperf using sending 'vm' to connect to 'ip_address'.
 
@@ -171,7 +171,7 @@ def Run(benchmark_spec):
 
   # Send traffic in both directions
   for sending_vm, receiving_vm in vms, reversed(vms):
-    for p in ["1", "10", "20", "40", "60", "100", "200", "500"]:
+    for p in [1, 10, 20, 40, 60, 100]:
       try:
         r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
         results.append(r)
