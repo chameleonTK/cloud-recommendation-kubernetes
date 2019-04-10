@@ -38,7 +38,7 @@ app.get('/', function(req, res){
   employeeProvider.findAll(function(error, emps){
       res.render('index', {
             title: 'Employees',
-            employees:emps
+            employees:emps || []
         });
   });
 });
