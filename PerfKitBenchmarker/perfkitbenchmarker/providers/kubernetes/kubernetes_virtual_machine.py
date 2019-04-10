@@ -17,7 +17,7 @@
 import json, yaml
 import logging
 import posixpath
-
+import os
 from perfkitbenchmarker import context
 from perfkitbenchmarker import disk
 from perfkitbenchmarker import errors
@@ -125,7 +125,18 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     #logging.info('About to create a pod with the following configuration:')
     try:
       logging.info("Name: "+self.name)
-    
+      files = []
+      for r, d, f in os.walk(FLAGS.kube_config_dir):
+        for file in f:
+          if '.yml' in file:
+            files.append(os.path.join(r, file))
+
+      for f in files:
+        logging.info("LOAD: "+f)
+        content = open(f).read()
+        kubernetes_helper.CreateResource(content)
+
+      '''
       logging.info("LOAD: "+FLAGS.kube_db_controller)
     
       dbctrl = open(FLAGS.kube_db_controller).read()
@@ -142,8 +153,9 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
       logging.info("LOAD: "+FLAGS.kube_web_service)
       webserv = open(FLAGS.kube_web_service).read()
       kubernetes_helper.CreateResource(webserv)
-    except:
-      logging.info("EE")
+      '''
+    except Exception as e:
+      logging.info("EE"+str(e))
  
   @vm_util.Retry(poll_interval=10, max_retries=100, log_errors=False)
   def _WaitForPodBootCompletion(self):

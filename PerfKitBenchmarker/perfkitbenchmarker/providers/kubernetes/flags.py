@@ -14,10 +14,11 @@
 
 from perfkitbenchmarker import flags
 
-flags.DEFINE_string('kube_db_controller', 'db-controller.yml', 'Path to the DB controller file.')
-flags.DEFINE_string('kube_db_service', 'db-service.yml', 'Path to the DB service file.')
-flags.DEFINE_string('kube_web_controller', 'web-controller.yml', 'Path to the web controller file.')
-flags.DEFINE_string('kube_web_service', 'web-service.yml', 'Path to the web service file.')
+#flags.DEFINE_string('kube_db_controller', 'db-controller.yml', 'Path to the DB controller file.')
+#flags.DEFINE_string('kube_db_service', 'db-service.yml', 'Path to the DB service file.')
+#flags.DEFINE_string('kube_web_controller', 'web-controller.yml', 'Path to the web controller file.')
+#flags.DEFINE_string('kube_web_service', 'web-service.yml', 'Path to the web service file.')
+flags.DEFINE_string('kube_config_dir', 'confs', 'Path to configs file')
 
 flags.DEFINE_string('ceph_secret', None,
                     'Name of the Ceph Secret used by Kubernetes in order to '
