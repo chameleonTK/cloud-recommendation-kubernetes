@@ -75,15 +75,15 @@ def Prepare(benchmark_spec):
     raise ValueError(
         'iperf benchmark requires exactly two machines, found {0}'.format(len(
             vms)))
-
-  for vm in vms:
-    vm.Install('iperf')
-    if vm_util.ShouldRunOnExternalIpAddress():
-      vm.AllowPort(IPERF_PORT)
-    stdout, _ = vm.RemoteCommand(('nohup iperf --server --port %s &> /dev/null'
-                                  '& echo $!') % IPERF_PORT)
-    # TODO store this in a better place once we have a better place
-    vm.iperf_server_pid = stdout.strip()
+  # TODO Enable it
+  # for vm in vms:
+  #   vm.Install('iperf')
+  #   if vm_util.ShouldRunOnExternalIpAddress():
+  #     vm.AllowPort(IPERF_PORT)
+  #   stdout, _ = vm.RemoteCommand(('nohup iperf --server --port %s &> /dev/null'
+  #                                 '& echo $!') % IPERF_PORT)
+  #   # TODO store this in a better place once we have a better place
+  #   vm.iperf_server_pid = stdout.strip()
 
 
 #@vm_util.Retry(max_retries=IPERF_RETRIES)
@@ -154,6 +154,108 @@ def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type, thread_co
   return sample.Sample('Throughput', total_throughput, 'Mbits/sec', metadata)
 
 
+#@vm_util.Retry(max_retries=IPERF_RETRIES)
+def _RunAB(sending_vm, receiving_vm, receiving_ip_address, ip_type, thread_count = 1):
+  """Run iperf using sending 'vm' to connect to 'ip_address'.
+
+  Args:
+    sending_vm: The VM sending traffic.
+    receiving_vm: The VM receiving traffic.
+    receiving_ip_address: The IP address of the iperf server (ie the receiver).
+    ip_type: The IP type of 'ip_address' (e.g. 'internal', 'external')
+  Returns:
+    A Sample.
+  """
+  ab_cmd = ('ab -k -c %s -n %s http://%s/' % (thread_count, 2000, receiving_ip_address))
+  # the additional time on top of the iperf runtime is to account for the
+  # time it takes for the iperf process to start and exit
+  timeout_buffer = FLAGS.iperf_timeout or 10
+  stdout, _ = sending_vm.RemoteCommand(ab_cmd, should_log=True,
+                                       timeout=FLAGS.iperf_runtime_in_seconds +
+                                       timeout_buffer, on_host=True)
+
+  # This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+  # Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+  # Licensed to The Apache Software Foundation, http://www.apache.org/
+
+  # Benchmarking 35.204.84.116 (be patient)
+  # Completed 200 requests
+  # Completed 400 requests
+  # Completed 600 requests
+  # Completed 800 requests
+  # Completed 1000 requests
+  # Completed 1200 requests
+  # Completed 1400 requests
+  # Completed 1600 requests
+  # Completed 1800 requests
+  # Completed 2000 requests
+  # Finished 2000 requests
+
+
+  # Server Software:        
+  # Server Hostname:        35.204.84.116
+  # Server Port:            80
+
+  # Document Path:          /
+  # Document Length:        660 bytes
+
+  # Concurrency Level:      1
+  # Time taken for tests:   25.586 seconds
+  # Complete requests:      2000
+  # Failed requests:        0
+  # Keep-Alive requests:    2000
+  # Total transferred:      1648000 bytes
+  # HTML transferred:       1320000 bytes
+  # Requests per second:    78.17 [#/sec] (mean)
+  # Time per request:       12.793 [ms] (mean)
+  # Time per request:       12.793 [ms] (mean, across all concurrent requests)
+  # Transfer rate:          62.90 [Kbytes/sec] received
+
+  # Connection Times (ms)
+  #               min  mean[+/-sd] median   max
+  # Connect:        0    0   0.3      0      12
+  # Processing:    12   13   1.1     13      37
+  # Waiting:       12   13   1.1     12      37
+  # Total:         12   13   1.2     13      37
+
+  # Percentage of the requests served within a certain time (ms)
+  #   50%     13
+  #   66%     13
+  #   75%     13
+  #   80%     13
+  #   90%     13
+  #   95%     14
+  #   98%     16
+  #   99%     18
+  # 100%     37 (longest request)
+
+  thread_values = re.findall(r'Requests per second:.*\s+(\d+\.?\d*).\[#\/sec\] \(mean\)', stdout)
+
+  total_throughput = 0.0
+  for value in thread_values:
+    total_throughput += float(value)
+
+  metadata = {
+      # The meta data defining the environment
+      'receiving_machine_type': receiving_vm.machine_type,
+      'receiving_zone': receiving_vm.zone,
+      'sending_machine_type': sending_vm.machine_type,
+      'sending_thread_count': thread_count,
+      'sending_zone': sending_vm.zone,
+      'runtime_in_seconds': FLAGS.iperf_runtime_in_seconds,
+      'ip_type': ip_type
+  }
+
+  long_request_values = re.findall(r'99%\s+(\d+\.?\d*)', stdout)
+  n_long_req = 0.0
+  for value in long_request_values:
+    n_long_req += float(value)
+
+  return [
+    sample.Sample('Requests per sec', total_throughput, '#/sec', metadata),
+    sample.Sample('Longest waiting time', n_long_req, 'ms', metadata)
+  ]
+
 def Run(benchmark_spec):
   """Run iperf on the target vm.
 
@@ -167,14 +269,35 @@ def Run(benchmark_spec):
   vms = benchmark_spec.vms
   results = []
 
-  logging.info('Iperf Results:')
+  # logging.info('Iperf Results:')
 
-  # Send traffic in both directions
+  # # Send traffic in both directions
+  # for sending_vm, receiving_vm in vms, reversed(vms):
+  #   for p in [1, 10, 20, 40]:
+  #     try:
+  #       r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
+  #       results.append(r)
+  #     except Exception as e:
+  #       metadata = {
+  #           # The meta data defining the environment
+  #           'receiving_machine_type': receiving_vm.machine_type,
+  #           'receiving_zone': receiving_vm.zone,
+  #           'sending_machine_type': sending_vm.machine_type,
+  #           'sending_thread_count': p,
+  #           'sending_zone': sending_vm.zone,
+  #           'runtime_in_seconds': FLAGS.iperf_runtime_in_seconds,
+  #           'ip_type': "external"
+  #       }
+
+  #       results.append(sample.Sample('Throughput', 0, 'Mbits/sec', metadata))
+
+  logging.info('AB Results:')
+  # Stress test
   for sending_vm, receiving_vm in vms, reversed(vms):
-    for p in [1, 10, 20, 40, 60]:
+    for p in [1, 5, 10, 50, 100, 200]:
       try:
-        r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
-        results.append(r)
+        r = _RunAB(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
+        results.extend(r)
       except Exception as e:
         metadata = {
             # The meta data defining the environment
@@ -187,8 +310,8 @@ def Run(benchmark_spec):
             'ip_type': "external"
         }
 
-        results.append(sample.Sample('Throughput', 0, 'Mbits/sec', metadata))
-
+        results.append(sample.Sample('Requests per sec', 0, '#/sec', metadata))
+        
   return results
 
 
@@ -200,5 +323,6 @@ def Cleanup(benchmark_spec):
         required to run the benchmark.
   """
   vms = benchmark_spec.vms
-  for vm in vms:
-    vm.RemoteCommand('kill -9 ' + vm.iperf_server_pid, ignore_failure=True)
+  # TODO Enable it
+  # for vm in vms:
+  #   vm.RemoteCommand('kill -9 ' + vm.iperf_server_pid, ignore_failure=True)
