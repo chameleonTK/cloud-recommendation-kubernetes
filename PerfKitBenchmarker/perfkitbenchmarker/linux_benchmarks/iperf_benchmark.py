@@ -104,7 +104,7 @@ def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type, thread_co
                 thread_count))
   # the additional time on top of the iperf runtime is to account for the
   # time it takes for the iperf process to start and exit
-  timeout_buffer = FLAGS.iperf_timeout or 30 + FLAGS.iperf_sending_thread_count
+  timeout_buffer = FLAGS.iperf_timeout or 30 + thread_count
   stdout, _ = sending_vm.RemoteCommand(iperf_cmd, should_log=True,
                                        timeout=FLAGS.iperf_runtime_in_seconds +
                                        timeout_buffer, on_host=True)
@@ -132,10 +132,10 @@ def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type, thread_co
     # below will tend to overestimate a bit.
     thread_values = re.findall('\[.*\d+\].*\s+(\d+\.?\d*).Mbits/sec', stdout)
 
-    if len(thread_values) != FLAGS.iperf_sending_thread_count:
+    if len(thread_values) != thread_count:
       raise ValueError('Only %s out of %s iperf threads reported a'
                        ' throughput value.' %
-                       (len(thread_values), FLAGS.iperf_sending_thread_count))
+                       (len(thread_values), thread_count))
 
   total_throughput = 0.0
   for value in thread_values:
@@ -146,7 +146,7 @@ def _RunIperf(sending_vm, receiving_vm, receiving_ip_address, ip_type, thread_co
       'receiving_machine_type': receiving_vm.machine_type,
       'receiving_zone': receiving_vm.zone,
       'sending_machine_type': sending_vm.machine_type,
-      'sending_thread_count': FLAGS.iperf_sending_thread_count,
+      'sending_thread_count': thread_count,
       'sending_zone': sending_vm.zone,
       'runtime_in_seconds': FLAGS.iperf_runtime_in_seconds,
       'ip_type': ip_type
@@ -172,8 +172,22 @@ def Run(benchmark_spec):
   # Send traffic in both directions
   for sending_vm, receiving_vm in vms, reversed(vms):
     for p in ["1", "10", "20", "40", "60", "100", "200", "500"]:
-      r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
-      results.append(r)
+      try:
+        r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
+        results.append(r)
+      except Exception as e:
+        metadata = {
+            # The meta data defining the environment
+            'receiving_machine_type': receiving_vm.machine_type,
+            'receiving_zone': receiving_vm.zone,
+            'sending_machine_type': sending_vm.machine_type,
+            'sending_thread_count': p,
+            'sending_zone': sending_vm.zone,
+            'runtime_in_seconds': FLAGS.iperf_runtime_in_seconds,
+            'ip_type': "external"
+        }
+
+        results.append(sample.Sample('Throughput', 0, 'Mbits/sec', metadata))
 
   return results
 
