@@ -1,0 +1,4531 @@
+2019-04-10 17:51:07,420 45cdb81c MainThread pkb.py:940 INFO     PerfKitBenchmarker version: unknown
+2019-04-10 17:51:07,422 45cdb81c MainThread pkb.py:914 INFO     Flag values:
+--cloud=Kubernetes
+--iperf_runtime_in_seconds=10
+--kubeconfig=kubeconfig.yml
+--kubectl=/snap/bin/kubectl
+--benchmarks=iperf
+--max_concurrent_threads=1
+2019-04-10 17:51:07,684 45cdb81c MainThread __init__.py:257 WARNING  The key "flags" was not in the default config, but was in user overrides. This may indicate a typo.
+2019-04-10 17:51:07,696 45cdb81c MainThread publisher.py:864 DEBUG    Using publishers: [<LogPublisher logger=<logging.RootLogger object at 0x7fe39f2cd6d0> level=20>, <PrettyPrintStreamPublisher stream=<open file '<stdout>', mode 'w' at 0x7fe3a0afc150>>, <NewlineDelimitedJSONPublisher file_path="/tmp/perfkitbenchmarker/runs/45cdb81c/perfkitbenchmarker_results.json" mode="wb">]
+2019-04-10 17:51:07,697 45cdb81c MainThread publisher.py:864 DEBUG    Using publishers: [<LogPublisher logger=<logging.RootLogger object at 0x7fe39f2cd6d0> level=20>, <PrettyPrintStreamPublisher stream=<open file '<stdout>', mode 'w' at 0x7fe3a0afc150>>, <NewlineDelimitedJSONPublisher file_path="/tmp/perfkitbenchmarker/runs/45cdb81c/perfkitbenchmarker_results.json" mode="wb">]
+2019-04-10 17:51:07,697 45cdb81c MainThread iperf(1/1) pkb.py:523 INFO     Provisioning resources for benchmark iperf
+2019-04-10 17:51:07,701 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:127 INFO     Name: pkb-45cdb81c-0
+2019-04-10 17:51:07,702 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:129 INFO     LOAD: db-controller.yml
+2019-04-10 17:51:07,703 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmp6AGVBk
+2019-04-10 17:51:09,638 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmp6AGVBk}  ReturnCode:0
+STDOUT: replicationcontroller/mongo-controller created
+
+STDERR: 
+2019-04-10 17:51:09,638 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:134 INFO     LOAD: db-service.yml
+2019-04-10 17:51:09,639 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpv69lfV
+2019-04-10 17:51:10,052 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpv69lfV}  ReturnCode:0
+STDOUT: service/mongo created
+
+STDERR: 
+2019-04-10 17:51:10,053 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:138 INFO     LOAD: web-controller.yml
+2019-04-10 17:51:10,053 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmp6UcQ43
+2019-04-10 17:51:10,362 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmp6UcQ43}  ReturnCode:0
+STDOUT: replicationcontroller/web-controller created
+
+STDERR: 
+2019-04-10 17:51:10,363 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:142 INFO     LOAD: web-service.yml
+2019-04-10 17:51:10,364 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpAUxLBh
+2019-04-10 17:51:10,674 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpAUxLBh}  ReturnCode:0
+STDOUT: service/web created
+
+STDERR: 
+2019-04-10 17:51:10,674 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:154 INFO     Waiting for POD pkb-45cdb81c-0
+2019-04-10 17:51:10,675 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json
+2019-04-10 17:51:10,886 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container mongo"
+                },
+                "creationTimestamp": "2019-04-10T17:51:09Z",
+                "generateName": "mongo-controller-",
+                "labels": {
+                    "name": "mongo"
+                },
+                "name": "mongo-controller-2grsx",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "mongo-controller",
+                        "uid": "3912eb78-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "975",
+                "selfLink": "/api/v1/namespaces/default/pods/mongo-controller-2grsx",
+                "uid": "3914cd8c-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "mongo",
+                        "imagePullPolicy": "Always",
+                        "name": "mongo",
+                        "ports": [
+                            {
+                                "containerPort": 27017,
+                                "hostPort": 27017,
+                                "name": "mongo",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/data/db",
+                                "name": "mongo-persistent-storage"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "gcePersistentDisk": {
+                            "fsType": "ext4",
+                            "pdName": "mongo-disk"
+                        },
+                        "name": "mongo-persistent-storage"
+                    },
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "message": "containers with unready status: [mongo]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "containers with unready status: [mongo]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "image": "mongo",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "mongo",
+                        "ready": false,
+                        "restartCount": 0,
+                        "state": {
+                            "waiting": {
+                                "reason": "ContainerCreating"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Pending",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:09Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+                },
+                "creationTimestamp": "2019-04-10T17:51:10Z",
+                "generateName": "web-controller-",
+                "labels": {
+                    "name": "web"
+                },
+                "name": "web-controller-n2xff",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "web-controller",
+                        "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "985",
+                "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+                "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "gcr.io/cs5052-p2/meanbm",
+                        "imagePullPolicy": "Always",
+                        "name": "web",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http-server",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 5000,
+                                "name": "iperf-server",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "message": "containers with unready status: [web]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "containers with unready status: [web]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "image": "gcr.io/cs5052-p2/meanbm",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "web",
+                        "ready": false,
+                        "restartCount": 0,
+                        "state": {
+                            "waiting": {
+                                "reason": "ContainerCreating"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Pending",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:10Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
+
+STDERR: 
+2019-04-10 17:51:10,887 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:164 INFO     POD STATUS: Pending
+2019-04-10 17:51:20,489 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:154 INFO     Waiting for POD pkb-45cdb81c-0
+2019-04-10 17:51:20,490 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json
+2019-04-10 17:51:20,669 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container mongo"
+                },
+                "creationTimestamp": "2019-04-10T17:51:09Z",
+                "generateName": "mongo-controller-",
+                "labels": {
+                    "name": "mongo"
+                },
+                "name": "mongo-controller-2grsx",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "mongo-controller",
+                        "uid": "3912eb78-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "975",
+                "selfLink": "/api/v1/namespaces/default/pods/mongo-controller-2grsx",
+                "uid": "3914cd8c-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "mongo",
+                        "imagePullPolicy": "Always",
+                        "name": "mongo",
+                        "ports": [
+                            {
+                                "containerPort": 27017,
+                                "hostPort": 27017,
+                                "name": "mongo",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/data/db",
+                                "name": "mongo-persistent-storage"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "gcePersistentDisk": {
+                            "fsType": "ext4",
+                            "pdName": "mongo-disk"
+                        },
+                        "name": "mongo-persistent-storage"
+                    },
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "message": "containers with unready status: [mongo]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "containers with unready status: [mongo]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "image": "mongo",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "mongo",
+                        "ready": false,
+                        "restartCount": 0,
+                        "state": {
+                            "waiting": {
+                                "reason": "ContainerCreating"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Pending",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:09Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+                },
+                "creationTimestamp": "2019-04-10T17:51:10Z",
+                "generateName": "web-controller-",
+                "labels": {
+                    "name": "web"
+                },
+                "name": "web-controller-n2xff",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "web-controller",
+                        "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "985",
+                "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+                "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "gcr.io/cs5052-p2/meanbm",
+                        "imagePullPolicy": "Always",
+                        "name": "web",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http-server",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 5000,
+                                "name": "iperf-server",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "message": "containers with unready status: [web]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "containers with unready status: [web]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "image": "gcr.io/cs5052-p2/meanbm",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "web",
+                        "ready": false,
+                        "restartCount": 0,
+                        "state": {
+                            "waiting": {
+                                "reason": "ContainerCreating"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Pending",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:10Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
+
+STDERR: 
+2019-04-10 17:51:20,670 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:164 INFO     POD STATUS: Pending
+2019-04-10 17:51:30,456 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:154 INFO     Waiting for POD pkb-45cdb81c-0
+2019-04-10 17:51:30,457 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json
+2019-04-10 17:51:30,630 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container mongo"
+                },
+                "creationTimestamp": "2019-04-10T17:51:09Z",
+                "generateName": "mongo-controller-",
+                "labels": {
+                    "name": "mongo"
+                },
+                "name": "mongo-controller-2grsx",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "mongo-controller",
+                        "uid": "3912eb78-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "975",
+                "selfLink": "/api/v1/namespaces/default/pods/mongo-controller-2grsx",
+                "uid": "3914cd8c-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "mongo",
+                        "imagePullPolicy": "Always",
+                        "name": "mongo",
+                        "ports": [
+                            {
+                                "containerPort": 27017,
+                                "hostPort": 27017,
+                                "name": "mongo",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/data/db",
+                                "name": "mongo-persistent-storage"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "gcePersistentDisk": {
+                            "fsType": "ext4",
+                            "pdName": "mongo-disk"
+                        },
+                        "name": "mongo-persistent-storage"
+                    },
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "message": "containers with unready status: [mongo]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "containers with unready status: [mongo]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "image": "mongo",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "mongo",
+                        "ready": false,
+                        "restartCount": 0,
+                        "state": {
+                            "waiting": {
+                                "reason": "ContainerCreating"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Pending",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:09Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+                },
+                "creationTimestamp": "2019-04-10T17:51:10Z",
+                "generateName": "web-controller-",
+                "labels": {
+                    "name": "web"
+                },
+                "name": "web-controller-n2xff",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "web-controller",
+                        "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "1033",
+                "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+                "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "gcr.io/cs5052-p2/meanbm",
+                        "imagePullPolicy": "Always",
+                        "name": "web",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http-server",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 5000,
+                                "name": "iperf-server",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:27Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://754f94c7a370fc4ac4ed246c40e0814e12f3afc235930c6b4cce062fc41b3e4e",
+                        "image": "gcr.io/cs5052-p2/meanbm:latest",
+                        "imageID": "docker-pullable://gcr.io/cs5052-p2/meanbm@sha256:c9c2f8c714ff3fd40cb1bbeb8d1720f83166392531efded5ab8afabd3e4ae998",
+                        "lastState": {},
+                        "name": "web",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-04-10T17:51:27Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Running",
+                "podIP": "10.60.0.6",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:10Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
+
+STDERR: 
+2019-04-10 17:51:30,631 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:164 INFO     POD STATUS: Pending
+2019-04-10 17:51:38,454 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:154 INFO     Waiting for POD pkb-45cdb81c-0
+2019-04-10 17:51:38,454 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json
+2019-04-10 17:51:38,631 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container mongo"
+                },
+                "creationTimestamp": "2019-04-10T17:51:09Z",
+                "generateName": "mongo-controller-",
+                "labels": {
+                    "name": "mongo"
+                },
+                "name": "mongo-controller-2grsx",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "mongo-controller",
+                        "uid": "3912eb78-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "1055",
+                "selfLink": "/api/v1/namespaces/default/pods/mongo-controller-2grsx",
+                "uid": "3914cd8c-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "mongo",
+                        "imagePullPolicy": "Always",
+                        "name": "mongo",
+                        "ports": [
+                            {
+                                "containerPort": 27017,
+                                "hostPort": 27017,
+                                "name": "mongo",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/data/db",
+                                "name": "mongo-persistent-storage"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "gcePersistentDisk": {
+                            "fsType": "ext4",
+                            "pdName": "mongo-disk"
+                        },
+                        "name": "mongo-persistent-storage"
+                    },
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:36Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://b754852245b365569c4b9022e306011090fc75e85374f67fa7e71aebc9256845",
+                        "image": "mongo:latest",
+                        "imageID": "docker-pullable://mongo@sha256:8200c871b237dcf9b4235b8c1e1268852abfea5b2bf39fb24461d8dd0cd37059",
+                        "lastState": {},
+                        "name": "mongo",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-04-10T17:51:36Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Running",
+                "podIP": "10.60.0.7",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:09Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+                },
+                "creationTimestamp": "2019-04-10T17:51:10Z",
+                "generateName": "web-controller-",
+                "labels": {
+                    "name": "web"
+                },
+                "name": "web-controller-n2xff",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "web-controller",
+                        "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "1033",
+                "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+                "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "gcr.io/cs5052-p2/meanbm",
+                        "imagePullPolicy": "Always",
+                        "name": "web",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http-server",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 5000,
+                                "name": "iperf-server",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:27Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://754f94c7a370fc4ac4ed246c40e0814e12f3afc235930c6b4cce062fc41b3e4e",
+                        "image": "gcr.io/cs5052-p2/meanbm:latest",
+                        "imageID": "docker-pullable://gcr.io/cs5052-p2/meanbm@sha256:c9c2f8c714ff3fd40cb1bbeb8d1720f83166392531efded5ab8afabd3e4ae998",
+                        "lastState": {},
+                        "name": "web",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-04-10T17:51:27Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Running",
+                "podIP": "10.60.0.6",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:10Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
+
+STDERR: 
+2019-04-10 17:51:38,632 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:164 INFO     POD STATUS: Running
+2019-04-10 17:51:38,632 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:164 INFO     POD STATUS: Running
+2019-04-10 17:51:38,633 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:175 INFO     PODs are up and running.
+2019-04-10 17:51:38,633 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff
+2019-04-10 17:51:38,836 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+        },
+        "creationTimestamp": "2019-04-10T17:51:10Z",
+        "generateName": "web-controller-",
+        "labels": {
+            "name": "web"
+        },
+        "name": "web-controller-n2xff",
+        "namespace": "default",
+        "ownerReferences": [
+            {
+                "apiVersion": "v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicationController",
+                "name": "web-controller",
+                "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+            }
+        ],
+        "resourceVersion": "1033",
+        "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+        "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+    },
+    "spec": {
+        "containers": [
+            {
+                "image": "gcr.io/cs5052-p2/meanbm",
+                "imagePullPolicy": "Always",
+                "name": "web",
+                "ports": [
+                    {
+                        "containerPort": 3000,
+                        "name": "http-server",
+                        "protocol": "TCP"
+                    },
+                    {
+                        "containerPort": 5000,
+                        "name": "iperf-server",
+                        "protocol": "TCP"
+                    }
+                ],
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-vzgrj",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-vzgrj",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-vzgrj"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:27Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://754f94c7a370fc4ac4ed246c40e0814e12f3afc235930c6b4cce062fc41b3e4e",
+                "image": "gcr.io/cs5052-p2/meanbm:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/meanbm@sha256:c9c2f8c714ff3fd40cb1bbeb8d1720f83166392531efded5ab8afabd3e4ae998",
+                "lastState": {},
+                "name": "web",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-10T17:51:27Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.48",
+        "phase": "Running",
+        "podIP": "10.60.0.6",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-10T17:51:10Z"
+    }
+}
+
+STDERR: 
+2019-04-10 17:51:38,837 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}
+2019-04-10 17:51:39,036 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:51:39,036 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}
+2019-04-10 17:51:39,208 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}}  ReturnCode:0
+STDOUT: 10.63.246.7
+STDERR: 
+2019-04-10 17:51:39,209 45cdb81c Thread-1 iperf(1/1) vm_util.py:278 INFO     Retrying exception running _PostCreate: External IP address not found
+2019-04-10 17:51:55,827 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}
+2019-04-10 17:51:56,000 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:51:56,000 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}
+2019-04-10 17:51:56,173 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}}  ReturnCode:0
+STDOUT: 10.63.246.7
+STDERR: 
+2019-04-10 17:51:56,173 45cdb81c Thread-1 iperf(1/1) vm_util.py:278 INFO     Retrying exception running _PostCreate: External IP address not found
+2019-04-10 17:52:13,629 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}
+2019-04-10 17:52:13,807 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}}  ReturnCode:0
+STDOUT: 35.204.65.192
+STDERR: 
+2019-04-10 17:52:13,807 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}
+2019-04-10 17:52:13,978 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}}  ReturnCode:0
+STDOUT: 10.63.246.7
+STDERR: 
+2019-04-10 17:52:13,979 45cdb81c Thread-1 iperf(1/1) benchmark_spec.py:675 INFO     VM: 35.204.65.192
+2019-04-10 17:52:13,979 45cdb81c Thread-1 iperf(1/1) benchmark_spec.py:676 INFO     Waiting for boot completion.
+2019-04-10 17:52:13,980 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c hostname
+2019-04-10 17:52:14,339 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c hostname}  ReturnCode:0
+STDOUT: web-controller-n2xff
+
+STDERR: 
+2019-04-10 17:52:14,388 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:127 INFO     Name: pkb-45cdb81c-1
+2019-04-10 17:52:14,389 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:129 INFO     LOAD: db-controller.yml
+2019-04-10 17:52:14,389 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpXQbveS
+2019-04-10 17:52:14,679 45cdb81c Thread-1 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpXQbveS}  ReturnCode:1
+STDOUT: 
+STDERR: Error from server (AlreadyExists): error when creating "/tmp/tmpXQbveS": replicationcontrollers "mongo-controller" already exists
+
+2019-04-10 17:52:14,680 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:134 INFO     LOAD: db-service.yml
+2019-04-10 17:52:14,680 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpnaerqu
+2019-04-10 17:52:14,966 45cdb81c Thread-1 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpnaerqu}  ReturnCode:1
+STDOUT: 
+STDERR: Error from server (AlreadyExists): error when creating "/tmp/tmpnaerqu": services "mongo" already exists
+
+2019-04-10 17:52:14,967 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:138 INFO     LOAD: web-controller.yml
+2019-04-10 17:52:14,967 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpfaFJmZ
+2019-04-10 17:52:15,268 45cdb81c Thread-1 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpfaFJmZ}  ReturnCode:1
+STDOUT: 
+STDERR: Error from server (AlreadyExists): error when creating "/tmp/tmpfaFJmZ": replicationcontrollers "web-controller" already exists
+
+2019-04-10 17:52:15,269 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:142 INFO     LOAD: web-service.yml
+2019-04-10 17:52:15,269 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpIJEpLX
+2019-04-10 17:52:15,562 45cdb81c Thread-1 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml create -f /tmp/tmpIJEpLX}  ReturnCode:1
+STDOUT: 
+STDERR: Error from server (AlreadyExists): error when creating "/tmp/tmpIJEpLX": services "web" already exists
+
+2019-04-10 17:52:15,563 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:154 INFO     Waiting for POD pkb-45cdb81c-1
+2019-04-10 17:52:15,563 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json
+2019-04-10 17:52:15,735 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o json}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container mongo"
+                },
+                "creationTimestamp": "2019-04-10T17:51:09Z",
+                "generateName": "mongo-controller-",
+                "labels": {
+                    "name": "mongo"
+                },
+                "name": "mongo-controller-2grsx",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "mongo-controller",
+                        "uid": "3912eb78-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "1055",
+                "selfLink": "/api/v1/namespaces/default/pods/mongo-controller-2grsx",
+                "uid": "3914cd8c-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "mongo",
+                        "imagePullPolicy": "Always",
+                        "name": "mongo",
+                        "ports": [
+                            {
+                                "containerPort": 27017,
+                                "hostPort": 27017,
+                                "name": "mongo",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/data/db",
+                                "name": "mongo-persistent-storage"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "gcePersistentDisk": {
+                            "fsType": "ext4",
+                            "pdName": "mongo-disk"
+                        },
+                        "name": "mongo-persistent-storage"
+                    },
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:36Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:09Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://b754852245b365569c4b9022e306011090fc75e85374f67fa7e71aebc9256845",
+                        "image": "mongo:latest",
+                        "imageID": "docker-pullable://mongo@sha256:8200c871b237dcf9b4235b8c1e1268852abfea5b2bf39fb24461d8dd0cd37059",
+                        "lastState": {},
+                        "name": "mongo",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-04-10T17:51:36Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Running",
+                "podIP": "10.60.0.7",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:09Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+                },
+                "creationTimestamp": "2019-04-10T17:51:10Z",
+                "generateName": "web-controller-",
+                "labels": {
+                    "name": "web"
+                },
+                "name": "web-controller-n2xff",
+                "namespace": "default",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicationController",
+                        "name": "web-controller",
+                        "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+                    }
+                ],
+                "resourceVersion": "1033",
+                "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+                "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "image": "gcr.io/cs5052-p2/meanbm",
+                        "imagePullPolicy": "Always",
+                        "name": "web",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "name": "http-server",
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 5000,
+                                "name": "iperf-server",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {
+                            "requests": {
+                                "cpu": "100m"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-vzgrj",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "default-token-vzgrj",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-vzgrj"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:27Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-04-10T17:51:10Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://754f94c7a370fc4ac4ed246c40e0814e12f3afc235930c6b4cce062fc41b3e4e",
+                        "image": "gcr.io/cs5052-p2/meanbm:latest",
+                        "imageID": "docker-pullable://gcr.io/cs5052-p2/meanbm@sha256:c9c2f8c714ff3fd40cb1bbeb8d1720f83166392531efded5ab8afabd3e4ae998",
+                        "lastState": {},
+                        "name": "web",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-04-10T17:51:27Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.164.0.48",
+                "phase": "Running",
+                "podIP": "10.60.0.6",
+                "qosClass": "Burstable",
+                "startTime": "2019-04-10T17:51:10Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
+
+STDERR: 
+2019-04-10 17:52:15,736 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:164 INFO     POD STATUS: Running
+2019-04-10 17:52:15,736 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:164 INFO     POD STATUS: Running
+2019-04-10 17:52:15,737 45cdb81c Thread-1 iperf(1/1) kubernetes_virtual_machine.py:175 INFO     PODs are up and running.
+2019-04-10 17:52:15,737 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff
+2019-04-10 17:52:15,907 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+        },
+        "creationTimestamp": "2019-04-10T17:51:10Z",
+        "generateName": "web-controller-",
+        "labels": {
+            "name": "web"
+        },
+        "name": "web-controller-n2xff",
+        "namespace": "default",
+        "ownerReferences": [
+            {
+                "apiVersion": "v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicationController",
+                "name": "web-controller",
+                "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+            }
+        ],
+        "resourceVersion": "1033",
+        "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+        "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+    },
+    "spec": {
+        "containers": [
+            {
+                "image": "gcr.io/cs5052-p2/meanbm",
+                "imagePullPolicy": "Always",
+                "name": "web",
+                "ports": [
+                    {
+                        "containerPort": 3000,
+                        "name": "http-server",
+                        "protocol": "TCP"
+                    },
+                    {
+                        "containerPort": 5000,
+                        "name": "iperf-server",
+                        "protocol": "TCP"
+                    }
+                ],
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-vzgrj",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-vzgrj",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-vzgrj"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:27Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://754f94c7a370fc4ac4ed246c40e0814e12f3afc235930c6b4cce062fc41b3e4e",
+                "image": "gcr.io/cs5052-p2/meanbm:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/meanbm@sha256:c9c2f8c714ff3fd40cb1bbeb8d1720f83166392531efded5ab8afabd3e4ae998",
+                "lastState": {},
+                "name": "web",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-10T17:51:27Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.48",
+        "phase": "Running",
+        "podIP": "10.60.0.6",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-10T17:51:10Z"
+    }
+}
+
+STDERR: 
+2019-04-10 17:52:15,907 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}
+2019-04-10 17:52:16,079 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.status.loadBalancer.ingress[0].ip}}  ReturnCode:0
+STDOUT: 35.204.65.192
+STDERR: 
+2019-04-10 17:52:16,079 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}
+2019-04-10 17:52:16,248 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get services web -ojsonpath={.spec.clusterIP}}  ReturnCode:0
+STDOUT: 10.63.246.7
+STDERR: 
+2019-04-10 17:52:16,248 45cdb81c Thread-1 iperf(1/1) benchmark_spec.py:675 INFO     VM: 35.204.65.192
+2019-04-10 17:52:16,249 45cdb81c Thread-1 iperf(1/1) benchmark_spec.py:676 INFO     Waiting for boot completion.
+2019-04-10 17:52:16,249 45cdb81c Thread-1 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c hostname
+2019-04-10 17:52:16,576 45cdb81c Thread-1 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c hostname}  ReturnCode:0
+STDOUT: web-controller-n2xff
+
+STDERR: 
+2019-04-10 17:52:16,613 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p /tmp/pkb
+2019-04-10 17:52:16,934 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p /tmp/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:16,934 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo mkdir -p /opt/pkb
+2019-04-10 17:52:17,253 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo mkdir -p /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:17,253 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo chmod a+rwxt /opt/pkb
+2019-04-10 17:52:17,587 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo chmod a+rwxt /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:17,587 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo apt-get update
+2019-04-10 17:52:20,812 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo apt-get update}  ReturnCode:0
+STDOUT: Get:1 http://security.ubuntu.com trusty-security InRelease [65.9 kB]
+Ign http://archive.ubuntu.com trusty InRelease
+Get:2 http://archive.ubuntu.com trusty-updates InRelease [65.9 kB]
+Hit http://archive.ubuntu.com trusty-backports InRelease
+Hit http://archive.ubuntu.com trusty Release.gpg
+Get:3 http://security.ubuntu.com trusty-security/main amd64 Packages [1025 kB]
+Get:4 http://archive.ubuntu.com trusty-updates/main amd64 Packages [1446 kB]
+Get:5 http://security.ubuntu.com trusty-security/restricted amd64 Packages [18.1 kB]
+Get:6 http://archive.ubuntu.com trusty-updates/restricted amd64 Packages [21.4 kB]
+Get:7 http://security.ubuntu.com trusty-security/universe amd64 Packages [375 kB]
+Get:8 http://archive.ubuntu.com trusty-updates/universe amd64 Packages [668 kB]
+Hit https://deb.nodesource.com trusty InRelease
+Get:9 http://security.ubuntu.com trusty-security/multiverse amd64 Packages [4723 B]
+Get:10 http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages [16.1 kB]
+Hit https://deb.nodesource.com trusty/main Sources
+Hit http://archive.ubuntu.com trusty Release
+Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+Hit https://deb.nodesource.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+Fetched 3706 kB in 1s (2508 kB/s)
+Reading package lists...
+
+STDERR: W: Size of file /var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_trusty-security_main_binary-amd64_Packages.gz is not what the server reported 1024885 1024887
+
+2019-04-10 17:52:20,812 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python
+2019-04-10 17:52:22,795 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+python is already the newest version.
+python set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+
+STDERR: 
+2019-04-10 17:52:22,795 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control
+2019-04-10 17:52:23,125 45cdb81c Thread-27 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control}  ReturnCode:1
+STDOUT: 
+STDERR: cat: /proc/sys/net/ipv4/tcp_congestion_control: No such file or directory
+command terminated with exit code 1
+
+2019-04-10 17:52:23,126 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lscpu
+2019-04-10 17:52:23,446 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lscpu}  ReturnCode:0
+STDOUT: Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                8
+On-line CPU(s) list:   0-7
+Thread(s) per core:    2
+Core(s) per socket:    4
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 85
+Stepping:              3
+CPU MHz:               2000.166
+BogoMIPS:              4000.33
+Hypervisor vendor:     KVM
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              56320K
+NUMA node0 CPU(s):     0-7
+
+STDERR: 
+2019-04-10 17:52:23,447 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release
+2019-04-10 17:52:25,494 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+lsb-release is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+
+STDERR: 
+2019-04-10 17:52:25,494 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lsb_release -d
+2019-04-10 17:52:25,845 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lsb_release -d}  ReturnCode:0
+STDOUT: Description:	Ubuntu 14.04.6 LTS
+
+STDERR: 
+2019-04-10 17:52:25,846 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c uname -r
+2019-04-10 17:52:26,174 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c uname -r}  ReturnCode:0
+STDOUT: 4.14.91+
+
+STDERR: 
+2019-04-10 17:52:26,174 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh
+2019-04-10 17:52:28,139 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+ssh is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+
+STDERR: 
+2019-04-10 17:52:28,139 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo /etc/init.d/ssh restart
+2019-04-10 17:52:28,471 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo /etc/init.d/ssh restart}  ReturnCode:0
+STDOUT:  * Restarting OpenBSD Secure Shell server sshd
+   ...done.
+
+STDERR: 
+2019-04-10 17:52:28,471 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p ~/.ssh
+2019-04-10 17:52:28,792 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p ~/.ssh}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:28,792 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt41dsYi4XkHM/Sw0jzLSo6eOxsinuTc1C/nuRa3D12tkqQOLjKNt7cfpDm3M3WlW8/SexZgYFhToRsHbu1z6abcxwa/p0vQHg9sQdq9ld7bIa0WitEmK6fEL62MhcDNOeRNDHBlN9TCCxqUF4SLg1RfDJsq/ujaz/R8b2XfncVe+JFOirzaIswISDnHroauRPjGEUdqIMNaFPuwITBZ07kd2outVhompiYFIBeR8TLEDBb/tFm9dc2tJmpJYVDyTEWtSuKoJHtnoJXw7DfSdMwQu0NxlXorGLdcLnvdrCXrRAciGVU3ygr271qZ/Yhc6rFOlJaxkD/ercZry6LABB pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys
+2019-04-10 17:52:29,146 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt41dsYi4XkHM/Sw0jzLSo6eOxsinuTc1C/nuRa3D12tkqQOLjKNt7cfpDm3M3WlW8/SexZgYFhToRsHbu1z6abcxwa/p0vQHg9sQdq9ld7bIa0WitEmK6fEL62MhcDNOeRNDHBlN9TCCxqUF4SLg1RfDJsq/ujaz/R8b2XfncVe+JFOirzaIswISDnHroauRPjGEUdqIMNaFPuwITBZ07kd2outVhompiYFIBeR8TLEDBb/tFm9dc2tJmpJYVDyTEWtSuKoJHtnoJXw7DfSdMwQu0NxlXorGLdcLnvdrCXrRAciGVU3ygr271qZ/Yhc6rFOlJaxkD/ercZry6LABB pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:29,172 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p /tmp/pkb
+2019-04-10 17:52:29,506 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p /tmp/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:29,507 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo mkdir -p /opt/pkb
+2019-04-10 17:52:29,830 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo mkdir -p /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:29,830 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo chmod a+rwxt /opt/pkb
+2019-04-10 17:52:30,152 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo chmod a+rwxt /opt/pkb}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:52:30,153 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo apt-get update
+2019-04-10 17:52:33,254 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo apt-get update}  ReturnCode:0
+STDOUT: Hit http://security.ubuntu.com trusty-security InRelease
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages
+Ign http://archive.ubuntu.com trusty InRelease
+Hit http://archive.ubuntu.com trusty-updates InRelease
+Hit http://archive.ubuntu.com trusty-backports InRelease
+Hit http://archive.ubuntu.com trusty Release.gpg
+Hit http://archive.ubuntu.com trusty-updates/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+Hit https://deb.nodesource.com trusty InRelease
+Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+Hit https://deb.nodesource.com trusty/main Sources
+Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+Hit https://deb.nodesource.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty Release
+Hit http://archive.ubuntu.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+Reading package lists...
+
+STDERR: 
+2019-04-10 17:52:33,254 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python
+2019-04-10 17:52:35,282 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install python}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+python is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+
+STDERR: 
+2019-04-10 17:52:35,282 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control
+2019-04-10 17:52:35,608 45cdb81c Thread-27 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/sys/net/ipv4/tcp_congestion_control}  ReturnCode:1
+STDOUT: 
+STDERR: cat: /proc/sys/net/ipv4/tcp_congestion_control: No such file or directory
+command terminated with exit code 1
+
+2019-04-10 17:52:35,609 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lscpu
+2019-04-10 17:52:35,944 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lscpu}  ReturnCode:0
+STDOUT: Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                8
+On-line CPU(s) list:   0-7
+Thread(s) per core:    2
+Core(s) per socket:    4
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 85
+Stepping:              3
+CPU MHz:               2000.166
+BogoMIPS:              4000.33
+Hypervisor vendor:     KVM
+Virtualization type:   full
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              56320K
+NUMA node0 CPU(s):     0-7
+
+STDERR: 
+2019-04-10 17:52:35,944 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release
+2019-04-10 17:52:37,934 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install lsb-release}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+lsb-release is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+
+STDERR: 
+2019-04-10 17:52:37,934 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lsb_release -d
+2019-04-10 17:52:38,281 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c lsb_release -d}  ReturnCode:0
+STDOUT: Description:	Ubuntu 14.04.6 LTS
+
+STDERR: 
+2019-04-10 17:52:38,281 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c uname -r
+2019-04-10 17:52:38,592 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c uname -r}  ReturnCode:0
+STDOUT: 4.14.91+
+
+STDERR: 
+2019-04-10 17:52:38,592 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh
+2019-04-10 17:52:40,549 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install ssh}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+ssh is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+
+STDERR: 
+2019-04-10 17:52:40,549 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo /etc/init.d/ssh restart
+2019-04-10 17:53:40,909 45cdb81c Thread-27 iperf(1/1) vm_util.py:364 INFO     Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo /etc/init.d/ssh restart}  ReturnCode:2
+STDOUT:  * Restarting OpenBSD Secure Shell server sshd
+
+STDERR: command terminated with exit code 2
+
+2019-04-10 17:53:40,911 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p ~/.ssh
+2019-04-10 17:53:41,328 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c mkdir -p ~/.ssh}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:53:41,328 45cdb81c Thread-27 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt41dsYi4XkHM/Sw0jzLSo6eOxsinuTc1C/nuRa3D12tkqQOLjKNt7cfpDm3M3WlW8/SexZgYFhToRsHbu1z6abcxwa/p0vQHg9sQdq9ld7bIa0WitEmK6fEL62MhcDNOeRNDHBlN9TCCxqUF4SLg1RfDJsq/ujaz/R8b2XfncVe+JFOirzaIswISDnHroauRPjGEUdqIMNaFPuwITBZ07kd2outVhompiYFIBeR8TLEDBb/tFm9dc2tJmpJYVDyTEWtSuKoJHtnoJXw7DfSdMwQu0NxlXorGLdcLnvdrCXrRAciGVU3ygr271qZ/Yhc6rFOlJaxkD/ercZry6LABB pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys
+2019-04-10 17:53:41,644 45cdb81c Thread-27 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt41dsYi4XkHM/Sw0jzLSo6eOxsinuTc1C/nuRa3D12tkqQOLjKNt7cfpDm3M3WlW8/SexZgYFhToRsHbu1z6abcxwa/p0vQHg9sQdq9ld7bIa0WitEmK6fEL62MhcDNOeRNDHBlN9TCCxqUF4SLg1RfDJsq/ujaz/R8b2XfncVe+JFOirzaIswISDnHroauRPjGEUdqIMNaFPuwITBZ07kd2outVhompiYFIBeR8TLEDBb/tFm9dc2tJmpJYVDyTEWtSuKoJHtnoJXw7DfSdMwQu0NxlXorGLdcLnvdrCXrRAciGVU3ygr271qZ/Yhc6rFOlJaxkD/ercZry6LABB pakawat_nk@benchmark
+" >> ~/.ssh/authorized_keys}  ReturnCode:0
+STDOUT: 
+STDERR: 
+2019-04-10 17:53:41,702 45cdb81c MainThread iperf(1/1) vm_util.py:526 INFO     ssh to VMs in this benchmark by name with:
+  ssh -F /tmp/perfkitbenchmarker/runs/45cdb81c/ssh_config <vm_name>
+  ssh -F /tmp/perfkitbenchmarker/runs/45cdb81c/ssh_config vm<index>
+  ssh -F /tmp/perfkitbenchmarker/runs/45cdb81c/ssh_config <group_name>-<index>
+2019-04-10 17:53:41,708 45cdb81c MainThread iperf(1/1) pkb.py:561 INFO     Preparing benchmark iperf
+2019-04-10 17:53:41,712 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf
+2019-04-10 17:53:45,764 45cdb81c MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  iperf
+0 upgraded, 1 newly installed, 0 to remove and 11 not upgraded.
+Need to get 56.3 kB of archives.
+After this operation, 174 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/universe iperf amd64 2.0.5-3 [56.3 kB]
+Fetched 56.3 kB in 0s (812 kB/s)
+Selecting previously unselected package iperf.
+(Reading database ... 20512 files and directories currently installed.)
+Preparing to unpack .../iperf_2.0.5-3_amd64.deb ...
+Unpacking iperf (2.0.5-3) ...
+Setting up iperf (2.0.5-3) ...
+
+STDERR: 
+2019-04-10 17:53:45,764 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c nohup iperf --server --port 5000 &> /dev/null& echo $!
+2019-04-10 17:53:46,088 45cdb81c MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c nohup iperf --server --port 5000 &> /dev/null& echo $!}  ReturnCode:0
+STDOUT: 391
+
+STDERR: 
+2019-04-10 17:53:46,088 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf
+2019-04-10 17:53:48,261 45cdb81c MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c sudo DEBIAN_FRONTEND='noninteractive' /usr/bin/apt-get -y install iperf}  ReturnCode:0
+STDOUT: Reading package lists...
+Building dependency tree...
+Reading state information...
+iperf is already the newest version.
+0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+
+STDERR: 
+2019-04-10 17:53:48,262 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c nohup iperf --server --port 5000 &> /dev/null& echo $!
+2019-04-10 17:53:48,576 45cdb81c MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c nohup iperf --server --port 5000 &> /dev/null& echo $!}  ReturnCode:0
+STDOUT: 412
+
+STDERR: 
+2019-04-10 17:53:48,581 45cdb81c MainThread iperf(1/1) pkb.py:595 INFO     Running benchmark iperf
+2019-04-10 17:53:48,581 45cdb81c MainThread iperf(1/1) iperf_benchmark.py:294 INFO     AB Results:
+2019-04-10 17:53:48,582 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 5 -n 2000 http://35.204.65.192/
+2019-04-10 17:53:53,470 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 5 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      5
+Time taken for tests:   4.872 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    410.52 [#/sec] (mean)
+Time per request:       12.180 [ms] (mean)
+Time per request:       2.436 [ms] (mean, across all concurrent requests)
+Transfer rate:          153.54 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.6      0      12
+Processing:    11   12   2.1     12      55
+Waiting:       11   12   2.1     12      55
+Total:         11   12   2.6     12      67
+
+Percentage of the requests served within a certain time (ms)
+  50%     12
+  66%     12
+  75%     12
+  80%     13
+  90%     13
+  95%     14
+  98%     14
+  99%     15
+ 100%     67 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:53:53,473 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 10 -n 2000 http://35.204.65.192/
+2019-04-10 17:53:55,831 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 10 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      10
+Time taken for tests:   2.341 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    854.19 [#/sec] (mean)
+Time per request:       11.707 [ms] (mean)
+Time per request:       1.171 [ms] (mean, across all concurrent requests)
+Transfer rate:          319.49 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.7      0      10
+Processing:    10   12   1.0     11      19
+Waiting:       10   12   1.0     11      19
+Total:         10   12   1.3     11      30
+WARNING: The median and mean for the processing time are not within a normal deviation
+        These results are probably not that reliable.
+WARNING: The median and mean for the waiting time are not within a normal deviation
+        These results are probably not that reliable.
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     12
+  75%     12
+  80%     12
+  90%     13
+  95%     14
+  98%     15
+  99%     15
+ 100%     30 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:53:55,833 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 50 -n 2000 http://35.204.65.192/
+2019-04-10 17:53:57,683 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 50 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      50
+Time taken for tests:   1.834 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1090.53 [#/sec] (mean)
+Time per request:       45.849 [ms] (mean)
+Time per request:       0.917 [ms] (mean, across all concurrent requests)
+Transfer rate:          407.88 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   1.6      0      11
+Processing:    16   45  16.6     35     119
+Waiting:       16   45  16.6     35     119
+Total:         26   45  16.8     35     130
+
+Percentage of the requests served within a certain time (ms)
+  50%     35
+  66%     45
+  75%     65
+  80%     66
+  90%     68
+  95%     70
+  98%     88
+  99%     93
+ 100%    130 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:53:57,685 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 100 -n 2000 http://35.204.65.192/
+2019-04-10 17:53:59,484 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 100 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.780 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1123.48 [#/sec] (mean)
+Time per request:       89.009 [ms] (mean)
+Time per request:       0.890 [ms] (mean, across all concurrent requests)
+Transfer rate:          420.21 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   2.2      0      11
+Processing:    15   86  26.5     78     178
+Waiting:       15   86  26.5     78     178
+Total:         25   87  26.0     78     189
+
+Percentage of the requests served within a certain time (ms)
+  50%     78
+  66%     81
+  75%     84
+  80%     87
+  90%    146
+  95%    155
+  98%    161
+  99%    163
+ 100%    189 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:53:59,486 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 200 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:01,354 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 200 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      200
+Time taken for tests:   1.848 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1082.07 [#/sec] (mean)
+Time per request:       184.831 [ms] (mean)
+Time per request:       0.924 [ms] (mean, across all concurrent requests)
+Transfer rate:          404.72 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   3.3      0      21
+Processing:    21  175  48.0    168     396
+Waiting:       21  175  48.0    168     396
+Total:         21  177  47.2    168     396
+
+Percentage of the requests served within a certain time (ms)
+  50%    168
+  66%    178
+  75%    182
+  80%    188
+  90%    211
+  95%    236
+  98%    342
+  99%    374
+ 100%    396 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:01,357 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 500 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:03,079 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 500 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      500
+Time taken for tests:   1.697 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1178.85 [#/sec] (mean)
+Time per request:       424.143 [ms] (mean)
+Time per request:       0.848 [ms] (mean, across all concurrent requests)
+Transfer rate:          440.92 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    3   5.0      0      15
+Processing:    29  371 200.2    295    1675
+Waiting:       29  371 200.2    295    1675
+Total:         40  374 201.0    295    1689
+
+Percentage of the requests served within a certain time (ms)
+  50%    295
+  66%    404
+  75%    437
+  80%    448
+  90%    450
+  95%    938
+  98%   1000
+  99%   1021
+ 100%   1689 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:03,081 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 1000 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:04,921 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 1000 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   1.801 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1110.49 [#/sec] (mean)
+Time per request:       900.507 [ms] (mean)
+Time per request:       0.901 [ms] (mean, across all concurrent requests)
+Transfer rate:          415.35 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   12  12.4      0      32
+Processing:    29  645 335.0    742    1767
+Waiting:       29  645 335.0    742    1767
+Total:         57  656 330.6    742    1797
+
+Percentage of the requests served within a certain time (ms)
+  50%    742
+  66%    750
+  75%    754
+  80%    757
+  90%    767
+  95%   1487
+  98%   1762
+  99%   1779
+ 100%   1797 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:04,923 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 5 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:09,380 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 5 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      5
+Time taken for tests:   4.436 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    450.82 [#/sec] (mean)
+Time per request:       11.091 [ms] (mean)
+Time per request:       2.218 [ms] (mean, across all concurrent requests)
+Transfer rate:          168.62 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.5      0      10
+Processing:    10   11   0.7     11      18
+Waiting:       10   11   0.7     11      18
+Total:         10   11   1.0     11      29
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     11
+  75%     11
+  80%     12
+  90%     12
+  95%     12
+  98%     13
+  99%     13
+ 100%     29 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:09,382 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 10 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:11,709 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 10 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      10
+Time taken for tests:   2.310 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    865.91 [#/sec] (mean)
+Time per request:       11.549 [ms] (mean)
+Time per request:       1.155 [ms] (mean, across all concurrent requests)
+Transfer rate:          323.87 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.7      0      10
+Processing:    10   11   0.6     11      20
+Waiting:       10   11   0.6     11      20
+Total:         10   12   1.1     11      30
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     12
+  75%     12
+  80%     12
+  90%     12
+  95%     12
+  98%     13
+  99%     13
+ 100%     30 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:11,712 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 50 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:13,437 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 50 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      50
+Time taken for tests:   1.708 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1171.07 [#/sec] (mean)
+Time per request:       42.696 [ms] (mean)
+Time per request:       0.854 [ms] (mean, across all concurrent requests)
+Transfer rate:          438.01 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   1.6      0      11
+Processing:    12   42  16.5     32     264
+Waiting:       12   42  16.5     32     264
+Total:         21   42  16.6     32     274
+
+Percentage of the requests served within a certain time (ms)
+  50%     32
+  66%     39
+  75%     61
+  80%     62
+  90%     64
+  95%     66
+  98%     69
+  99%     71
+ 100%    274 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:13,439 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 100 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:15,214 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 100 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.756 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1138.83 [#/sec] (mean)
+Time per request:       87.810 [ms] (mean)
+Time per request:       0.878 [ms] (mean, across all concurrent requests)
+Transfer rate:          425.95 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   2.2      0      12
+Processing:    11   85  28.4     74     202
+Waiting:       11   85  28.4     74     202
+Total:         20   85  28.0     74     202
+
+Percentage of the requests served within a certain time (ms)
+  50%     74
+  66%     77
+  75%     79
+  80%     94
+  90%    142
+  95%    151
+  98%    165
+  99%    176
+ 100%    202 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:15,216 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 200 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:16,927 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 200 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      200
+Time taken for tests:   1.691 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1182.91 [#/sec] (mean)
+Time per request:       169.075 [ms] (mean)
+Time per request:       0.845 [ms] (mean, across all concurrent requests)
+Transfer rate:          442.44 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   3.2      0      11
+Processing:    16  160  44.6    155     497
+Waiting:       16  160  44.6    155     497
+Total:         25  161  43.3    155     509
+
+Percentage of the requests served within a certain time (ms)
+  50%    155
+  66%    160
+  75%    164
+  80%    168
+  90%    171
+  95%    247
+  98%    307
+  99%    326
+ 100%    509 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:16,929 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 500 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:18,613 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 500 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      500
+Time taken for tests:   1.660 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1204.52 [#/sec] (mean)
+Time per request:       415.104 [ms] (mean)
+Time per request:       0.830 [ms] (mean, across all concurrent requests)
+Transfer rate:          450.52 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    3   4.5      0      12
+Processing:    11  357 357.8    235    1646
+Waiting:       11  357 357.8    235    1646
+Total:         11  360 360.6    235    1658
+
+Percentage of the requests served within a certain time (ms)
+  50%    235
+  66%    335
+  75%    337
+  80%    338
+  90%    691
+  95%   1243
+  98%   1612
+  99%   1631
+ 100%   1658 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:18,615 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /bin/bash -c ab -k -c 1000 -n 2000 http://35.204.65.192/
+2019-04-10 17:54:20,302 45cdb81c MainThread iperf(1/1) vm_util.py:364 INFO     Ran: {/bin/bash -c ab -k -c 1000 -n 2000 http://35.204.65.192/}  ReturnCode:0
+STDOUT: This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 35.204.65.192 (be patient)
+
+
+Server Software:        
+Server Hostname:        35.204.65.192
+Server Port:            80
+
+Document Path:          /
+Document Length:        219 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   1.657 seconds
+Complete requests:      2000
+Failed requests:        0
+Keep-Alive requests:    2000
+Total transferred:      766000 bytes
+HTML transferred:       438000 bytes
+Requests per second:    1206.75 [#/sec] (mean)
+Time per request:       828.669 [ms] (mean)
+Time per request:       0.829 [ms] (mean, across all concurrent requests)
+Transfer rate:          451.35 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   11  11.7     17      29
+Processing:    16  606 342.4    635    1613
+Waiting:       16  606 342.4    635    1612
+Total:         45  617 339.7    635    1630
+
+Percentage of the requests served within a certain time (ms)
+  50%    635
+  66%    640
+  75%    641
+  80%    681
+  90%   1276
+  95%   1424
+  98%   1591
+  99%   1609
+ 100%   1630 (longest request)
+
+STDERR: Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+2019-04-10 17:54:20,305 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/cpuinfo | grep processor | wc -l
+2019-04-10 17:54:20,651 45cdb81c MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/cpuinfo | grep processor | wc -l}  ReturnCode:0
+STDOUT: 8
+
+STDERR: 
+2019-04-10 17:54:20,652 45cdb81c MainThread iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/cpuinfo | grep processor | wc -l
+2019-04-10 17:54:20,991 45cdb81c MainThread iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml exec -i web-controller-n2xff -- /bin/bash -c cat /proc/cpuinfo | grep processor | wc -l}  ReturnCode:0
+STDOUT: 8
+
+STDERR: 
+2019-04-10 17:54:20,994 45cdb81c MainThread iperf(1/1) pkb.py:646 INFO     Cleaning up benchmark iperf
+2019-04-10 17:54:20,994 45cdb81c MainThread iperf(1/1) pkb.py:665 INFO     Tearing down resources for benchmark iperf
+2019-04-10 17:54:20,996 45cdb81c Thread-80 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff
+2019-04-10 17:54:21,177 45cdb81c Thread-80 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+        },
+        "creationTimestamp": "2019-04-10T17:51:10Z",
+        "generateName": "web-controller-",
+        "labels": {
+            "name": "web"
+        },
+        "name": "web-controller-n2xff",
+        "namespace": "default",
+        "ownerReferences": [
+            {
+                "apiVersion": "v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicationController",
+                "name": "web-controller",
+                "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+            }
+        ],
+        "resourceVersion": "1033",
+        "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+        "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+    },
+    "spec": {
+        "containers": [
+            {
+                "image": "gcr.io/cs5052-p2/meanbm",
+                "imagePullPolicy": "Always",
+                "name": "web",
+                "ports": [
+                    {
+                        "containerPort": 3000,
+                        "name": "http-server",
+                        "protocol": "TCP"
+                    },
+                    {
+                        "containerPort": 5000,
+                        "name": "iperf-server",
+                        "protocol": "TCP"
+                    }
+                ],
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-vzgrj",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-vzgrj",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-vzgrj"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:27Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://754f94c7a370fc4ac4ed246c40e0814e12f3afc235930c6b4cce062fc41b3e4e",
+                "image": "gcr.io/cs5052-p2/meanbm:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/meanbm@sha256:c9c2f8c714ff3fd40cb1bbeb8d1720f83166392531efded5ab8afabd3e4ae998",
+                "lastState": {},
+                "name": "web",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-10T17:51:27Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.48",
+        "phase": "Running",
+        "podIP": "10.60.0.6",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-10T17:51:10Z"
+    }
+}
+
+STDERR: 
+2019-04-10 17:54:21,217 45cdb81c Thread-80 iperf(1/1) vm_util.py:315 INFO     Running: /snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff
+2019-04-10 17:54:21,390 45cdb81c Thread-80 iperf(1/1) vm_util.py:366 DEBUG    Ran: {/snap/bin/kubectl --kubeconfig=kubeconfig.yml get pod -o=json web-controller-n2xff}  ReturnCode:0
+STDOUT: {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container web"
+        },
+        "creationTimestamp": "2019-04-10T17:51:10Z",
+        "generateName": "web-controller-",
+        "labels": {
+            "name": "web"
+        },
+        "name": "web-controller-n2xff",
+        "namespace": "default",
+        "ownerReferences": [
+            {
+                "apiVersion": "v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicationController",
+                "name": "web-controller",
+                "uid": "3981cbd8-5bb9-11e9-a78c-42010aa40068"
+            }
+        ],
+        "resourceVersion": "1033",
+        "selfLink": "/api/v1/namespaces/default/pods/web-controller-n2xff",
+        "uid": "3982dc73-5bb9-11e9-a78c-42010aa40068"
+    },
+    "spec": {
+        "containers": [
+            {
+                "image": "gcr.io/cs5052-p2/meanbm",
+                "imagePullPolicy": "Always",
+                "name": "web",
+                "ports": [
+                    {
+                        "containerPort": 3000,
+                        "name": "http-server",
+                        "protocol": "TCP"
+                    },
+                    {
+                        "containerPort": 5000,
+                        "name": "iperf-server",
+                        "protocol": "TCP"
+                    }
+                ],
+                "resources": {
+                    "requests": {
+                        "cpu": "100m"
+                    }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "default-token-vzgrj",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeName": "gke-bm1-4498-default-pool-737d0323-z0tp",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "name": "default-token-vzgrj",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "default-token-vzgrj"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:27Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": null,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-04-10T17:51:10Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://754f94c7a370fc4ac4ed246c40e0814e12f3afc235930c6b4cce062fc41b3e4e",
+                "image": "gcr.io/cs5052-p2/meanbm:latest",
+                "imageID": "docker-pullable://gcr.io/cs5052-p2/meanbm@sha256:c9c2f8c714ff3fd40cb1bbeb8d1720f83166392531efded5ab8afabd3e4ae998",
+                "lastState": {},
+                "name": "web",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-04-10T17:51:27Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "10.164.0.48",
+        "phase": "Running",
+        "podIP": "10.60.0.6",
+        "qosClass": "Burstable",
+        "startTime": "2019-04-10T17:51:10Z"
+    }
+}
+
+STDERR: 
+2019-04-10 17:54:21,465 45cdb81c MainThread publisher.py:455 INFO     
+-------------------------PerfKitBenchmarker Complete Results-------------------------
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 5,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '7b9add38-ba1d-4c51-a234-6574b2f1eb0e',
+ 'test': 'iperf',
+ 'timestamp': 1554918833.473037,
+ 'unit': '#/sec',
+ 'value': 410.52}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 5,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'be85492d-3899-4bf8-be06-a4bd129d0e0e',
+ 'test': 'iperf',
+ 'timestamp': 1554918833.473063,
+ 'unit': 'ms',
+ 'value': 15.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 10,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'cb59f938-1049-49ee-a947-b3675df41367',
+ 'test': 'iperf',
+ 'timestamp': 1554918835.83352,
+ 'unit': '#/sec',
+ 'value': 854.19}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 10,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '5bbd1b80-6c4e-416f-95b3-cf4d58bd5955',
+ 'test': 'iperf',
+ 'timestamp': 1554918835.833542,
+ 'unit': 'ms',
+ 'value': 15.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 50,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'c6f2bf27-cf8d-4d7e-9208-a769ea70fc2c',
+ 'test': 'iperf',
+ 'timestamp': 1554918837.685805,
+ 'unit': '#/sec',
+ 'value': 1090.53}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 50,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '93049f71-d968-4a22-ae71-e2d4213a1c38',
+ 'test': 'iperf',
+ 'timestamp': 1554918837.685827,
+ 'unit': 'ms',
+ 'value': 93.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 100,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'f9025160-2100-4d88-a413-7b4247fa0790',
+ 'test': 'iperf',
+ 'timestamp': 1554918839.486791,
+ 'unit': '#/sec',
+ 'value': 1123.48}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 100,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '49160f10-e22c-4132-836b-98d363ee5740',
+ 'test': 'iperf',
+ 'timestamp': 1554918839.486812,
+ 'unit': 'ms',
+ 'value': 163.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 200,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'e8678e0b-be2a-43b7-8c1f-23f3f11ef2f3',
+ 'test': 'iperf',
+ 'timestamp': 1554918841.356924,
+ 'unit': '#/sec',
+ 'value': 1082.07}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 200,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '295cd209-6390-4616-b969-ea847430dcfd',
+ 'test': 'iperf',
+ 'timestamp': 1554918841.356944,
+ 'unit': 'ms',
+ 'value': 374.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 500,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '37ffd172-35d1-4f4c-adfc-5a54badd0da2',
+ 'test': 'iperf',
+ 'timestamp': 1554918843.081497,
+ 'unit': '#/sec',
+ 'value': 1178.85}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 500,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '4447b84f-94d8-45f8-ab9a-eec4292d661c',
+ 'test': 'iperf',
+ 'timestamp': 1554918843.081519,
+ 'unit': 'ms',
+ 'value': 1021.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 1000,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '8ebed018-d64f-4407-9836-073350c3cdd9',
+ 'test': 'iperf',
+ 'timestamp': 1554918844.923606,
+ 'unit': '#/sec',
+ 'value': 1110.49}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 1000,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '572873f3-c7c5-449c-a68f-7210f9007c67',
+ 'test': 'iperf',
+ 'timestamp': 1554918844.923628,
+ 'unit': 'ms',
+ 'value': 1779.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 5,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'e2d4277c-dc41-4740-af35-20ddc77794db',
+ 'test': 'iperf',
+ 'timestamp': 1554918849.38251,
+ 'unit': '#/sec',
+ 'value': 450.82}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 5,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'd69449f6-476c-4c3b-a8ae-2c80e37ddc59',
+ 'test': 'iperf',
+ 'timestamp': 1554918849.382533,
+ 'unit': 'ms',
+ 'value': 13.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 10,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '9ee7d783-cbc7-4cf3-a535-93ea549aeced',
+ 'test': 'iperf',
+ 'timestamp': 1554918851.712091,
+ 'unit': '#/sec',
+ 'value': 865.91}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 10,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'ee2abf01-dce6-477d-9f71-efb79da4116c',
+ 'test': 'iperf',
+ 'timestamp': 1554918851.712112,
+ 'unit': 'ms',
+ 'value': 13.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 50,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '18ad96dd-148b-42b4-8e0b-07a93cdb4757',
+ 'test': 'iperf',
+ 'timestamp': 1554918853.439858,
+ 'unit': '#/sec',
+ 'value': 1171.07}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 50,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '364bc94d-6adf-48e8-81bd-171b982a8a29',
+ 'test': 'iperf',
+ 'timestamp': 1554918853.43988,
+ 'unit': 'ms',
+ 'value': 71.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 100,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '3ce2639b-3bff-4d0a-84a7-357dd1f13af8',
+ 'test': 'iperf',
+ 'timestamp': 1554918855.21685,
+ 'unit': '#/sec',
+ 'value': 1138.83}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 100,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '3973881c-0c44-4d82-bf95-8184f1cd50b9',
+ 'test': 'iperf',
+ 'timestamp': 1554918855.216871,
+ 'unit': 'ms',
+ 'value': 176.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 200,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '0ec1c711-81e6-4153-bcb6-d0376247f4db',
+ 'test': 'iperf',
+ 'timestamp': 1554918856.929712,
+ 'unit': '#/sec',
+ 'value': 1182.91}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 200,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '473d6651-657e-4fd3-accc-3889d06b1d18',
+ 'test': 'iperf',
+ 'timestamp': 1554918856.929734,
+ 'unit': 'ms',
+ 'value': 326.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 500,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '4b20d274-b8ce-41a6-8139-48576ef675cd',
+ 'test': 'iperf',
+ 'timestamp': 1554918858.615261,
+ 'unit': '#/sec',
+ 'value': 1204.52}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 500,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'e5cee7b3-5ae9-4f12-95a8-9e5b8c992015',
+ 'test': 'iperf',
+ 'timestamp': 1554918858.615282,
+ 'unit': 'ms',
+ 'value': 1631.0}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 1000,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Requests per sec',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '38d4cac3-7f7c-4907-8b60-d0a638d61793',
+ 'test': 'iperf',
+ 'timestamp': 1554918860.304635,
+ 'unit': '#/sec',
+ 'value': 1206.75}
+{'metadata': {'ip_type': 'external',
+              'perfkitbenchmarker_version': 'unknown',
+              'receiving_machine_type': None,
+              'receiving_zone': None,
+              'run_number': 0,
+              'runtime_in_seconds': 10,
+              'sending_machine_type': None,
+              'sending_thread_count': 1000,
+              'sending_zone': None,
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'Longest waiting time',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': '29e3535b-490c-4f0c-82e9-e47ee9a52d30',
+ 'test': 'iperf',
+ 'timestamp': 1554918860.304657,
+ 'unit': 'ms',
+ 'value': 1609.0}
+{'metadata': {'perfkitbenchmarker_version': 'unknown',
+              'vm_1_cloud': 'Kubernetes',
+              'vm_1_image': 'ubuntu:16.04',
+              'vm_1_kernel_release': u'4.14.91+',
+              'vm_1_num_cpus': 8,
+              'vm_1_numa_node_count': 1,
+              'vm_1_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_1_tcp_congestion_control': 'unknown',
+              'vm_1_vm_count': 1,
+              'vm_1_zone': None,
+              'vm_2_cloud': 'Kubernetes',
+              'vm_2_image': 'ubuntu:16.04',
+              'vm_2_kernel_release': u'4.14.91+',
+              'vm_2_num_cpus': 8,
+              'vm_2_numa_node_count': 1,
+              'vm_2_os_info': u'Ubuntu 14.04.6 LTS',
+              'vm_2_tcp_congestion_control': 'unknown',
+              'vm_2_vm_count': 1,
+              'vm_2_zone': None},
+ 'metric': 'End to End Runtime',
+ 'official': False,
+ 'owner': 'pakawat_nk',
+ 'product_name': 'PerfKitBenchmarker',
+ 'run_uri': '45cdb81c-17534584-55aa-4ad6-ab9f-e842b20904f8',
+ 'sample_uri': 'e1b7f896-385c-43c2-a6fe-38855948c5bb',
+ 'test': 'iperf',
+ 'timestamp': 1554918861.434422,
+ 'unit': 'seconds',
+ 'value': 193.7369840145111}
+
+2019-04-10 17:54:21,477 45cdb81c MainThread publisher.py:428 DEBUG    Pretty-printing results to <open file '<stdout>', mode 'w' at 0x7fe3a0afc150>:
+
+-------------------------PerfKitBenchmarker Results Summary-------------------------
+IPERF:
+  ip_type="external" run_number="0" runtime_in_seconds="10"
+  Requests per sec                    410.520000 #/sec                          (sending_thread_count="5")
+  Longest waiting time                 15.000000 ms                             (sending_thread_count="5")
+  Requests per sec                    854.190000 #/sec                          (sending_thread_count="10")
+  Longest waiting time                 15.000000 ms                             (sending_thread_count="10")
+  Requests per sec                   1090.530000 #/sec                          (sending_thread_count="50")
+  Longest waiting time                 93.000000 ms                             (sending_thread_count="50")
+  Requests per sec                   1123.480000 #/sec                          (sending_thread_count="100")
+  Longest waiting time                163.000000 ms                             (sending_thread_count="100")
+  Requests per sec                   1082.070000 #/sec                          (sending_thread_count="200")
+  Longest waiting time                374.000000 ms                             (sending_thread_count="200")
+  Requests per sec                   1178.850000 #/sec                          (sending_thread_count="500")
+  Longest waiting time               1021.000000 ms                             (sending_thread_count="500")
+  Requests per sec                   1110.490000 #/sec                          (sending_thread_count="1000")
+  Longest waiting time               1779.000000 ms                             (sending_thread_count="1000")
+  Requests per sec                    450.820000 #/sec                          (sending_thread_count="5")
+  Longest waiting time                 13.000000 ms                             (sending_thread_count="5")
+  Requests per sec                    865.910000 #/sec                          (sending_thread_count="10")
+  Longest waiting time                 13.000000 ms                             (sending_thread_count="10")
+  Requests per sec                   1171.070000 #/sec                          (sending_thread_count="50")
+  Longest waiting time                 71.000000 ms                             (sending_thread_count="50")
+  Requests per sec                   1138.830000 #/sec                          (sending_thread_count="100")
+  Longest waiting time                176.000000 ms                             (sending_thread_count="100")
+  Requests per sec                   1182.910000 #/sec                          (sending_thread_count="200")
+  Longest waiting time                326.000000 ms                             (sending_thread_count="200")
+  Requests per sec                   1204.520000 #/sec                          (sending_thread_count="500")
+  Longest waiting time               1631.000000 ms                             (sending_thread_count="500")
+  Requests per sec                   1206.750000 #/sec                          (sending_thread_count="1000")
+  Longest waiting time               1609.000000 ms                             (sending_thread_count="1000")
+  End to End Runtime                  193.736984 seconds                       
+
+-------------------------
+For all tests: perfkitbenchmarker_version="unknown" receiving_machine_type="None" receiving_zone="None" sending_machine_type="None" sending_zone="None" vm_1_cloud="Kubernetes" vm_1_image="ubuntu:16.04" vm_1_kernel_release="4.14.91+" vm_1_num_cpus="8" vm_1_numa_node_count="1" vm_1_os_info="Ubuntu 14.04.6 LTS" vm_1_tcp_congestion_control="unknown" vm_1_vm_count="1" vm_1_zone="None" vm_2_cloud="Kubernetes" vm_2_image="ubuntu:16.04" vm_2_kernel_release="4.14.91+" vm_2_num_cpus="8" vm_2_numa_node_count="1" vm_2_os_info="Ubuntu 14.04.6 LTS" vm_2_tcp_congestion_control="unknown" vm_2_vm_count="1" vm_2_zone="None"
+
+2019-04-10 17:54:21,479 45cdb81c MainThread publisher.py:485 INFO     Publishing 29 samples to /tmp/perfkitbenchmarker/runs/45cdb81c/perfkitbenchmarker_results.json
+2019-04-10 17:54:21,481 45cdb81c MainThread pkb.py:1032 INFO     Benchmark run statuses:
+------------------------------------------
+Name   UID     Status     Failed Substatus
+------------------------------------------
+iperf  iperf0  SUCCEEDED                  
+------------------------------------------
+Success rate: 100.00% (1/1)
+2019-04-10 17:54:21,481 45cdb81c MainThread pkb.py:1035 INFO     Complete logs can be found at: /tmp/perfkitbenchmarker/runs/45cdb81c/pkb.log
+2019-04-10 17:54:21,482 45cdb81c MainThread pkb.py:1037 INFO     Completion statuses can be found at: /tmp/perfkitbenchmarker/runs/45cdb81c/completion_statuses.json
