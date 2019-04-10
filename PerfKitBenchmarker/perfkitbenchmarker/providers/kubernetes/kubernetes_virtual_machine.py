@@ -86,7 +86,10 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     self._DeleteVolumes()
 
   def _Create(self):
-    self._CreatePod()
+    try:
+      self._CreatePod()
+    except Exception as e:
+      logging.info("Create Failed")
     self._WaitForPodBootCompletion()
 
   @vm_util.Retry()
@@ -120,25 +123,27 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     """
     #create_rc_body = self._BuildPodBody()
     #logging.info('About to create a pod with the following configuration:')
-    logging.info("Name: "+self.name)
-    '''
-    logging.info("LOAD: "+FLAGS.kube_db_controller)
+    try:
+      logging.info("Name: "+self.name)
     
-    dbctrl = open(FLAGS.kube_db_controller).read()
-    kubernetes_helper.CreateResource(dbctrl)
+      logging.info("LOAD: "+FLAGS.kube_db_controller)
     
-    logging.info("LOAD: "+FLAGS.kube_db_service)
-    dbserv = open(FLAGS.kube_db_service).read()
-    kubernetes_helper.CreateResource(dbserv)
+      dbctrl = open(FLAGS.kube_db_controller).read()
+      kubernetes_helper.CreateResource(dbctrl)
+    
+      logging.info("LOAD: "+FLAGS.kube_db_service)
+      dbserv = open(FLAGS.kube_db_service).read()
+      kubernetes_helper.CreateResource(dbserv)
 
-    logging.info("LOAD: "+FLAGS.kube_web_controller)
-    webctrl = open(FLAGS.kube_web_controller).read()
-    kubernetes_helper.CreateResource(webctrl)
+      logging.info("LOAD: "+FLAGS.kube_web_controller)
+      webctrl = open(FLAGS.kube_web_controller).read()
+      kubernetes_helper.CreateResource(webctrl)
 
-    logging.info("LOAD: "+FLAGS.kube_web_service)
-    webserv = open(FLAGS.kube_web_service).read()
-    kubernetes_helper.CreateResource(webserv)
-    '''
+      logging.info("LOAD: "+FLAGS.kube_web_service)
+      webserv = open(FLAGS.kube_web_service).read()
+      kubernetes_helper.CreateResource(webserv)
+    except:
+      logging.info("EE")
  
   @vm_util.Retry(poll_interval=10, max_retries=100, log_errors=False)
   def _WaitForPodBootCompletion(self):

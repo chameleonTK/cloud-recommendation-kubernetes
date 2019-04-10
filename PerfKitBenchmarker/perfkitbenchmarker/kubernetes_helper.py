@@ -37,14 +37,14 @@ def CreateFromFile(file_name):
   checkKubernetesFlags()
   create_cmd = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig, 'create',
                 '-f', file_name]
-  vm_util.IssueRetryableCommand(create_cmd)
+  vm_util.IssueCommand(create_cmd)
 
 
 def DeleteFromFile(file_name):
   checkKubernetesFlags()
   delete_cmd = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig, 'delete',
                 '-f', file_name, '--ignore-not-found']
-  vm_util.IssueRetryableCommand(delete_cmd)
+  vm_util.IssueCommand(delete_cmd)
 
 
 def DeleteAllFiles(file_list):
