@@ -171,7 +171,7 @@ def Run(benchmark_spec):
 
   # Send traffic in both directions
   for sending_vm, receiving_vm in vms, reversed(vms):
-    for p in [1, 10, 20, 40, 60, 100]:
+    for p in [1, 10, 20, 40, 60]:
       try:
         r = _RunIperf(sending_vm, receiving_vm, receiving_vm.ip_address, 'external', thread_count = p)
         results.append(r)
