@@ -5,10 +5,14 @@ import os
 
 from random import randint
 
+#python Main.py --kubectl=/snap/bin/kubectl --project=cs5052-p2 -m n1-standard-1 -z europe-west4-a -n 2
 parser = ArgumentParser()
 parser.add_argument("-kc", "--kubectl", required=True, help="Path to your kubectl", metavar="FILE")
 #parser.add_argument("-i", "--image", required=True, help="Docker image")
 parser.add_argument("-p", "--project", required=True, help="Project Name")
+parser.add_argument("-m", "--machinetype", required=True, help="Machine type")
+parser.add_argument("-z", "--zone", required=True, help="Zone")
+parser.add_argument("-n", "--numnodes", required=True, help="Num nodes")
 
 args = parser.parse_args()
 
@@ -76,7 +80,8 @@ def runBenchmark(clusterName, conf):
 
 clusterPrefix = "bm"
 configs = [
-    {"zone": "europe-west4-a", "machineType": "n1-standard-1", "numNodes": 2}
+    {"zone": args.zone, "machineType": args.machinetype, "numNodes": args.numnodes}
+    # {"zone": "europe-west4-a", "machineType": "n1-standard-1", "numNodes": 2}
 ]
 
 index = 1
@@ -88,7 +93,7 @@ for c in configs:
     
     print clusterName 
     issueCommand([
-	"gcloud", "compute", "disks", "create", "--project", "cs5052-p2", "--zone", "us-central1-f", "--size", "200GB", "mongo-disk"
+	"gcloud", "compute", "disks", "create", "--project", args.project, "--zone", c["zone"], "--size", "200GB", "mongo-disk"
     ])
 
     #gcloud compute disks create --project "cs5052-p2" --zone "us-central1-f" --size 200GB mongo-disk
