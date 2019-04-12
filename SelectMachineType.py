@@ -71,7 +71,7 @@ def getResults():
                 elif r["metric"] == "End to End Runtime":
                     results[m]["ab_e2e"].append(value)
                 else:
-                    print r["metric"]
+                    print(r["metric"])
         
         fileName = "results/iperf/"+m+"/perfkitbenchmarker_results.json"
         with open(fileName) as fin:
@@ -86,7 +86,7 @@ def getResults():
                 elif r["metric"] == "End to End Runtime":
                     results[m]["iperf_e2e"].append(value)
                 else:
-                    print r["metric"]
+                    print(r["metric"])
 
     return results
 
@@ -108,7 +108,7 @@ color.extend(["#005000", "#004600", "#003c00"])
 ax = plt.subplot(1,1,1)
 ax.bar(machineTypes, thoughput, color=color)
 # plt.title('Cloud benchmark')
-plt.title('Network thoughputs (Mbits/sec)')
+plt.ylabel('Network thoughputs (Mbits/sec)')
 handles, labels = ax.get_legend_handles_labels()
 plt.xticks(i, machineTypes, rotation='vertical')
 plt.tight_layout()
@@ -131,8 +131,11 @@ yConByMachine = {}
 for s in machineSet:
     mm = s["machines"]
     ax = plt.subplot(3, 1, gindex)
-    if gindex==1:
-        plt.title('Requests per sec')
+    if gindex==2:
+        ax.set_ylabel('#requests per second')
+    
+    if gindex==3:
+        ax.set_xlabel('#concurrent clients')
     for m in mm:
         tp = []
 
@@ -166,23 +169,47 @@ for r in [2, 4, 6]:
     ax = plt.subplot(3, 1, gindex)
     y = []
     if gindex==1:
-        plt.title('Requests per dollar ratio')
+        plt.title('Requests per dollar at different number of concurrent clients')
     for m in machineTypes:
         tp = []
 
-        y.append(yConByMachine[m][r]*1.0/cost[m]["totalPerMonth"])
+        y.append(int(yConByMachine[m][r]/cost[m]["totalPerMonth"]))
 
         index += 1
 
     ax.bar(machineTypes, y, color=color)
     gindex +=1
-    ax.set_ylabel("At "+str(xCon[r])+" requests")
+    ax.set_ylabel("At "+str(xCon[r])+" clients")
     ax.set_xticklabels([])
+    ax.set_ylim([0,10])
 
 plt.xticks(i, machineTypes, rotation='vertical')
 plt.tight_layout()
 
+plt.show()
 
+gindex = 1
+ax = None
+for r in [2, 4, 6]:
+    ax = plt.subplot(3, 1, gindex)
+    y = []
+    if gindex==1:
+        plt.title('#requests load at different number of concurrent clients')
+    for m in machineTypes:
+        tp = []
+
+        y.append(int(yConByMachine[m][r]))
+
+        index += 1
+
+    ax.bar(machineTypes, y, color=color)
+    gindex +=1
+    ax.set_ylabel("At "+str(xCon[r])+" clients")
+    ax.set_xticklabels([])
+    ax.set_ylim([0,1500])
+
+plt.xticks(i, machineTypes, rotation='vertical')
+plt.tight_layout()
 
 plt.show()
 
