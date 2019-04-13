@@ -17,7 +17,9 @@ It is an part of [CS5052](https://info.cs.st-andrews.ac.uk/student-handbook/modu
 7. Run `gcloud init`; It will prompt a dialog to log in and set your project.
 8. Enable Google Cloud API; Kubernetes API, Billing API
 
-
+### Setup your own application
+9. build and push your own docker to Google's Container regirtry
+10. write your `kubernates configuration files` [Follow this link](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)
 
 ## Running
 1. Run:
@@ -31,13 +33,8 @@ $ ./ctrl.sh
 ](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl)
 
 ### Todos
-* Main.py does not connect with PerfKitBenchmarker properly.
 * Support multiple endpoints (benchmark when it exploits loadbalancer)
 * Clean up pods
-* Call iperf from external client `iperf --client 35.204.47.217 --port 5000 --format m --time 10 -P 1`
-* call iperf with different params `iperf -c 1.1.1.1 --port 80 --format m --time 10 -P [10]**`
-* Connect with other benchmarks
-* Analyse data from benchmarks
 
 
 ## Author
