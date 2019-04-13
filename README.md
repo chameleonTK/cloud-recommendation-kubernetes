@@ -23,8 +23,7 @@ It is an part of [CS5052](https://info.cs.st-andrews.ac.uk/student-handbook/modu
 1. Run:
 
 ```bash
-$ python Main.py --kubectl=/snap/bin/kubectl --project=<project-id>
-$ ./PerfKitBenchmarker/pkb.py --cloud=Kubernetes --kubectl=/snap/bin/kubectl --benchmarks=iperf --kubeconfig=kubeconfig.yml --max_concurrent_threads=1
+$ ./ctrl.sh
 ```
 
 ### Usefull links

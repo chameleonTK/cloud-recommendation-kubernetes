@@ -37,7 +37,7 @@ def issueCommand(cmd):
             break
         if output != '':
             o += output
-            sys.stdout.write(out)
+            sys.stdout.write(output)
             sys.stdout.flush()
             #print output.strip()
 
