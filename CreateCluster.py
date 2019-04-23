@@ -90,14 +90,13 @@ for c in configs:
     print "CLUSTER CONFIG: "
     print c
 
-    #clusterName = createCluster(clusterPrefix, index, args.project, c)
-    clusterName = "bm1-4923"
+    clusterName = createCluster(clusterPrefix, index, args.project, c)
+    #clusterName = "bm1-4923"
     print clusterName 
-    #issueCommand([
-#	"gcloud", "compute", "disks", "create", "--project", args.project, "--zone", c["zone"], "--size", "200GB", "mongo-disk"
-#    ])
+    issueCommand([
+	"gcloud", "compute", "disks", "create", "--project", args.project, "--zone", c["zone"], "--size", "200GB", "mongo-disk"
+    ])
 
-    #clusterName = "bm1-4867"
     #issueCommand(["cp", os.path.expanduser('~/.kube/config'), "kubeconfig.yml"])    
     #runBenchmark(clusterName, c)
     index += 1
