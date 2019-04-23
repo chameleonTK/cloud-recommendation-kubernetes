@@ -125,6 +125,7 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     #logging.info('About to create a pod with the following configuration:')
     try:
       logging.info("Name: "+self.name)
+      '''
       files = []
       for r, d, f in os.walk(FLAGS.kube_config_dir):
         for file in f:
@@ -135,7 +136,10 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
         logging.info("LOAD: "+f)
         content = open(f).read()
         kubernetes_helper.CreateResource(content)
+      '''
 
+      create_cmd = [FLAGS.kubectl, '--kubeconfig=%s' % FLAGS.kubeconfig, 'apply', '-k', FLAGS.kube_config_dir]
+      pod_info, _, _w = vm_util.IssueCommand(create_cmd, suppress_warning=True)
       '''
       logging.info("LOAD: "+FLAGS.kube_db_controller)
     
@@ -180,8 +184,8 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
         
         #TODO implement to support multiple clients
         name = item["metadata"]["name"]
-        if name.startswith("web-controller"):
-           self.name = name
+        if name.startswith(FLAGS.kube_ctrl_name):        
+          self.name = name
 
       if all_ready:
         logging.info('PODs are up and running.')
@@ -250,8 +254,8 @@ class KubernetesVirtualMachine(virtual_machine.BaseVirtualMachine):
     """
     Gets the POD's internal ip address.
     """
-    ext_ip = kubernetes_helper.Get('services', "web", '', '.status.loadBalancer.ingress[0].ip')
-    pod_ip = kubernetes_helper.Get('services', "web", '', '.spec.clusterIP')
+    ext_ip = kubernetes_helper.Get('services', FLAGS.kube_service_name, '', '.status.loadBalancer.ingress[0].ip')
+    pod_ip = kubernetes_helper.Get('services', FLAGS.kube_service_name, '', '.spec.clusterIP')
 
     if not pod_ip:
       raise Exception('Internal POD IP address not found. Retrying.')

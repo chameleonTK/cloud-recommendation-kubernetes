@@ -19,6 +19,8 @@ from perfkitbenchmarker import flags
 #flags.DEFINE_string('kube_web_controller', 'web-controller.yml', 'Path to the web controller file.')
 #flags.DEFINE_string('kube_web_service', 'web-service.yml', 'Path to the web service file.')
 flags.DEFINE_string('kube_config_dir', 'confs', 'Path to configs file')
+flags.DEFINE_string('kube_service_name', 'web', 'Service name')
+flags.DEFINE_string('kube_ctrl_name', 'web-controller', 'Controller name')
 
 flags.DEFINE_string('ceph_secret', None,
                     'Name of the Ceph Secret used by Kubernetes in order to '

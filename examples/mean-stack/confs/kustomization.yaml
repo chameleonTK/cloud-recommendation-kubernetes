@@ -1,0 +1,5 @@
+resources:
+  - db-controller.yml
+  - db-service.yml
+  - web-controller.yml
+  - web-service.yml
