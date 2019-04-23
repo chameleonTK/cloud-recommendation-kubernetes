@@ -14,6 +14,12 @@ if [ -z "$ZONE" ]; then
   ZONE="europe-west4-a"
 fi
 
+echo "Enter entry service(web): "
+read ENTRY
+if [ -z "$ZONE" ]; then
+  ENTRY="web"
+fi
+
 RANDOMSTR=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')
 mkdir /tmp/perfkitbenchmarker/backup_${RANDOMSTR}
 mv /tmp/perfkitbenchmarker/runs/* /tmp/perfkitbenchmarker/backup_${RANDOMSTR}
@@ -28,7 +34,8 @@ for m in ${machineType[@]}; do
    fi
 
    python CreateCluster.py --kubectl=${KUBECTL} --project=${PROJECT_NAME} -m ${m} -z ${ZONE} -n 2
-   ./PerfKitBenchmarker/pkb.py --cloud=Kubernetes --kubectl=/snap/bin/kubectl --benchmarks=iperf --kubeconfig=${HOME}/.kube/config --json_path=${HOME}/bm-result/${m}.json
+   ./PerfKitBenchmarker/pkb.py --cloud=Kubernetes --kubectl=/snap/bin/kubectl --benchmarks=iperf --kubeconfig=${HOME}/.kube/config --json_path=${HOME}/bm-result/${m}.json --kube_service_name=${ENTRY} --kube_ctrl_name=${ENTRY}
+
 done
  
 #cp -r /tmp/perfkitbenchmarker/runs results
