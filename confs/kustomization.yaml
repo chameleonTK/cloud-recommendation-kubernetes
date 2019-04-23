@@ -1,8 +1,5 @@
-secretGenerator:
-- name: mysql-pass
-  literals:
-  - password=imtk
- 
 resources:
-  - mysql-deployment.yaml
-  - wordpress-deployment.yaml
+  - db-controller.yml
+  - db-service.yml
+  - web-controller.yml
+  - web-service.yml
